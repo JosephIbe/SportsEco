@@ -9,17 +9,11 @@ import com.google.gson.annotations.SerializedName;
 @Table(name = "batches")
 public class Batch extends Model{
 
-    @Expose
-    @SerializedName("message")
     private String message;
 
-    @Expose
-    @SerializedName("batch_name")
     @Column(name = "batch_name")
     public String batchName;
 
-    @Expose
-    @SerializedName("batch_id")
     @Column(name = "batch_id")
     public String batchId;
 

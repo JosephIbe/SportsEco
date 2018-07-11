@@ -13,20 +13,34 @@ public class Sessions extends Model {
     @Column(name = "session_name")
     public String sessionName;
 
-    @Column(name = "program_details")
-    public ProgramDetails programDetails;
+//    @Column(name = "program_details")
+//    public ProgramDetails programDetails;
+
+    @Column(name = "program_session_id")
+    public String programSessionId;
+
+    @Column(name = "program_id")
+    public String programId;
+
+    @Column(name = "program_name")
+    public String programName;
 
     @Column(name = "session_date_time")
     public String dateTime;
 
+    @Column(name = "coach_id")
+    public String coachId;
+
     public Sessions() {
     }
 
-    public Sessions(int sessionIcon, String sessionName, ProgramDetails programDetails, String progId, String dateTime) {
-        this.sessionIcon = sessionIcon;
+    public Sessions(String sessionName, String programSessionId, String programId, String programName, String dateTime, String coachId) {
         this.sessionName = sessionName;
-        this.programDetails = programDetails;
+        this.programSessionId = programSessionId;
+        this.programId = programId;
+        this.programName = programName;
         this.dateTime = dateTime;
+        this.coachId = coachId;
     }
 
     public int getSessionIcon() {
@@ -45,12 +59,28 @@ public class Sessions extends Model {
         this.sessionName = sessionName;
     }
 
-    public ProgramDetails getProgramDetails() {
-        return programDetails;
+    public String getProgramSessionId() {
+        return programSessionId;
     }
 
-    public void setProgramDetails(ProgramDetails programDetails) {
-        this.programDetails = programDetails;
+    public void setProgramSessionId(String programSessionId) {
+        this.programSessionId = programSessionId;
+    }
+
+    public String getProgramId() {
+        return programId;
+    }
+
+    public void setProgramId(String programId) {
+        this.programId = programId;
+    }
+
+    public String getProgramName() {
+        return programName;
+    }
+
+    public void setProgramName(String programName) {
+        this.programName = programName;
     }
 
     public String getDateTime() {
@@ -59,5 +89,13 @@ public class Sessions extends Model {
 
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public String getCoachId() {
+        return coachId;
+    }
+
+    public void setCoachId(String coachId) {
+        this.coachId = coachId;
     }
 }

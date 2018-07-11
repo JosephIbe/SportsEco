@@ -12,31 +12,24 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
+import com.activeandroid.query.Select;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.jjoey.sportseco.R;
-import com.jjoey.sportseco.adapters.BatchAdapter;
-import com.jjoey.sportseco.adapters.HomeMiscAdapter;
 import com.jjoey.sportseco.adapters.ItemsDrawerAdapter;
-import com.jjoey.sportseco.adapters.SessionsAdapter;
 import com.jjoey.sportseco.fragments.BatchFragment;
 import com.jjoey.sportseco.interfaces.RecyclerClickListener;
 import com.jjoey.sportseco.models.Batch;
-import com.jjoey.sportseco.models.BatchFooter;
-import com.jjoey.sportseco.models.CoachResponse;
+import com.jjoey.sportseco.models.Coach;
 import com.jjoey.sportseco.models.ItemsDrawer;
 import com.jjoey.sportseco.models.ItemsHeader;
-import com.jjoey.sportseco.models.Sessions;
 import com.jjoey.sportseco.utils.Constants;
 import com.jjoey.sportseco.utils.RecyclerItemTouchListener;
 
@@ -75,15 +68,30 @@ public class HomeActivity extends AppCompatActivity {
 
         setUpDrawer();
 
-        //setBatchSpinner();
+        setBatchSpinner();
 
+        BatchFragment batchFragment = new BatchFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("coach_id", coachId);
+        bundle.putString("batch_id", id_batch);
+        batchFragment.setArguments(bundle);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frameBatches, new BatchFragment()).commit();
+        ft.replace(R.id.frameBatches, batchFragment).commit();
 
     }
 
     private void setBatchSpinner() {
-        coachId = getIntent().getExtras().getString("coach_id");
+        Coach coach = new Select()
+                .from(Coach.class)
+                .orderBy("id ASC")
+                .executeSingle();
+        coachId = coach.coachId;
+
+        batch = new Select()
+                .from(Batch.class)
+                .orderBy("id ASC")
+                .executeSingle();
+        id_batch = batch.batchId;
         Log.d(TAG,"Coach id Home:\t" + coachId);
         if (coachId != null){
             fetchBatches(coachId);
@@ -194,6 +202,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setDrawerClickListener() {
         drawerRV.addOnItemTouchListener(new RecyclerItemTouchListener(this, drawerRV, new RecyclerClickListener() {
+
+            private Intent intent = null;
+
             @Override
             public void onClick(View view, int position) {
                 switch (position){
@@ -202,12 +213,16 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
                     case 2:
-                        startActivity(new Intent(HomeActivity.this, FeedbackActivity.class));
+                        intent = new Intent(HomeActivity.this, FeedbackActivity.class);
+                        intent.putExtra("coach_id", coachId);
+                        intent.putExtra("batch_id", id_batch);
+                        startActivity(intent);
                         break;
 
                     case 3:
-                        Toast.makeText(HomeActivity.this, "Batches Clicked", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(HomeActivity.this, SelectBatchActivity.class));
+                        intent = new Intent(HomeActivity.this, SelectBatchActivity.class);
+                        intent.putExtra("coach_id", coachId);
+                        startActivity(intent);
                         break;
 
                     case 4:
@@ -220,8 +235,10 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
                     case 6:
-                        Toast.makeText(HomeActivity.this, "Player Stats Clicked", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(HomeActivity.this, PlayerStatsActivity.class));
+                        intent = new Intent(HomeActivity.this, PlayerStatsActivity.class);
+                        intent.putExtra("coach_id", coachId);
+                        intent.putExtra("batch_id", id_batch);
+                        startActivity(intent);
                         break;
                 }
             }

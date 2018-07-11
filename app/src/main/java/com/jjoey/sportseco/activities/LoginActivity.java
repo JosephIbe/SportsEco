@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.activeandroid.query.Select;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginBtn;
 
     private String email = null, pass = null;
-    private String ic_coach;
+    private String id_coach;
     private Batch batch;
     private List<Object> list = new ArrayList<>();
     private List<ProgramDetails> detailsList = new ArrayList<>();
@@ -85,14 +86,11 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         if (response != null) {
-//                            CoachResponse res = new Gson().fromJson(response.toString(), CoachResponse.class);
-//                            ic_coach = res.getCoachDetails().getCoachId();
-                            Log.d(TAG, "Coach Response:\t" + response.toString());
                             try {
                                 JSONObject object = new JSONObject(response.toString());
                                 JSONObject details = object.getJSONObject("coach_details");
 
-                                ic_coach = details.getString("coach_id");
+                                id_coach = details.getString("coach_id");
                                 String academyId = details.getString("academy_id");
                                 String username = details.getString("username");
                                 String firstName = details.getString("first_name");
@@ -104,20 +102,17 @@ public class LoginActivity extends AppCompatActivity {
                                 String state = details.getString("state");
                                 String email = details.getString("email");
 
-                                saveCoachDetails(ic_coach, academyId, username, firstName, lastName, midName, nick, gender, mobile, state, email);
+                                saveCoachDetails(id_coach, academyId, username, firstName, lastName, midName, nick, gender, mobile, state, email);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-                            Log.d(TAG, "CoachResponse id:\t" + coach.getCoachId());
-//                            fetchBatches(ic_coach);
-
-//                            if (res.getMessage().equals(Constants.SUCCESS_MSG) && ic_coach != null) {
+//                            if (res.getMessage().equals(Constants.SUCCESS_MSG) && id_coach != null) {
                                 // TODO: 7/5/2018 Check first login and send to Batch or Home Activity
 //                                Intent intent = new Intent(LoginActivity.this, SelectBatchActivity.class);
 //                                intent.putExtra("first_name", res.getCoachDetails().getFirstName());
-//                                intent.putExtra("ic_coach", ic_coach);
+//                                intent.putExtra("id_coach", id_coach);
 //                                startActivity(intent);
 //                                finish();
 //                          }
@@ -132,9 +127,9 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void saveCoachDetails(String id_coach, String academyId, String username, String firstName, String lastName, String midName, String nick, String gender, String mobile, String state, String email) {
+    private void saveCoachDetails(String idCoach, String academyId, String username, String firstName, String lastName, String midName, String nick, String gender, String mobile, String state, String email) {
         coach = new Coach();
-        coach.setCoachId(id_coach);
+        coach.setCoachId(idCoach);
         coach.setAcademyId(academyId);
         coach.setUsername(username);
         coach.setEmailAddr(email);
@@ -147,6 +142,14 @@ public class LoginActivity extends AppCompatActivity {
         coach.setOriginState(state);
 
         coach.save();
+
+        Coach coachQuery = new Select()
+                .from(Coach.class)
+                .where("coach_id=?", id_coach)
+                .executeSingle();
+        Log.d(TAG, "Coach id:\t" + coachQuery.coachId);
+        id_coach = coachQuery.coachId;
+        fetchBatches(idCoach);
 
     }
 
@@ -180,7 +183,7 @@ public class LoginActivity extends AppCompatActivity {
                                     String name_batch = jsonObject.getString("batch_name");
                                     String id_batch = jsonObject.getString("batch_id");
 
-                                    fetchProgramList(id_batch, coachId);
+//                                    fetchProgramList(id_batch, coachId);
 
                                     batch = new Batch();
                                     batch.setBatchId(id_batch);
@@ -191,7 +194,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Log.d(TAG, "Batch Size:\t" + list.size());
                                     if (list.size() > 1){
                                         Intent intent = new Intent(LoginActivity.this, SelectBatchActivity.class);
-                                        intent.putExtra("ic_coach", coachId);
+                                        intent.putExtra("id_coach", coachId);
                                         startActivity(intent);
                                         finish();
                                     } else {
@@ -212,10 +215,8 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void fetchProgramList(String batch_id, String coachId) {
+    private void fetchProgramList(final String batch_id, String coachId) {
         JSONObject object = new JSONObject();
-        Log.d(TAG, "Coach id for program list:\t" + Integer.parseInt(coachId));
-        Log.d(TAG, "Batch id for program list:\t" + Integer.parseInt(batch_id));
         try {
             object.put("coach_id", coachId);
             object.put("batch_id", batch_id);
@@ -246,6 +247,7 @@ public class LoginActivity extends AppCompatActivity {
                                     batch.setBatchId(obj.getString("batch_id"));
 
                                     programDetails.setBatch(batch);
+                                    programDetails.setCoachId(id_coach);
                                     programDetails.setProgId(obj.getString("prg_id"));
                                     programDetails.setProgramName(obj.getString("prg_name"));
                                     programDetails.setProgUserMapId(obj.getString("prg_user_map_id"));
@@ -259,9 +261,11 @@ public class LoginActivity extends AppCompatActivity {
 
                                     if (detailsList.size() > 1){
 //                                        startActivity(new Intent(LoginActivity.this, ProgramsActivity.class));
-                                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                     } else {
-                                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                        Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                                        homeIntent.putExtra("coach_id", id_coach);
+                                        homeIntent.putExtra("batch_id", batch_id);
+                                        startActivity(homeIntent);
                                     }
 
                                 }

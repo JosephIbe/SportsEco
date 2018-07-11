@@ -43,20 +43,6 @@ public class Coach extends Model {
     public Coach() {
     }
 
-    public Coach(String coachId, String academyId, String username, String firstName, String lastName, String gender, String mobileNum, String emailAddr, String midName, String nickName, String originState) {
-        this.coachId = coachId;
-        this.academyId = academyId;
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.mobileNum = mobileNum;
-        this.emailAddr = emailAddr;
-        this.midName = midName;
-        this.nickName = nickName;
-        this.originState = originState;
-    }
-
     public String getCoachId() {
         return coachId;
     }

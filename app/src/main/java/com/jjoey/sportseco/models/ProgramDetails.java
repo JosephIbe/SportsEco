@@ -25,6 +25,9 @@ public class ProgramDetails extends Model{
     @Column(name = "batch")
     public Batch batch;
 
+    @Column(name = "coach_id")
+    public String coachId;
+
     public ProgramDetails() {
     }
 
@@ -35,6 +38,16 @@ public class ProgramDetails extends Model{
         this.startDate = startDate;
         this.endDate = endDate;
         this.batch = batch;
+    }
+
+    public ProgramDetails(String programName, String progId, String progUserMapId, String startDate, String endDate, Batch batch, String coachId) {
+        this.programName = programName;
+        this.progId = progId;
+        this.progUserMapId = progUserMapId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.batch = batch;
+        this.coachId = coachId;
     }
 
     public String getProgramName() {
@@ -84,4 +97,13 @@ public class ProgramDetails extends Model{
     public void setBatch(Batch batch) {
         this.batch = batch;
     }
+
+    public String getCoachId() {
+        return coachId;
+    }
+
+    public void setCoachId(String coachId) {
+        this.coachId = coachId;
+    }
+
 }

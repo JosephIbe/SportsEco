@@ -4,11 +4,14 @@ package com.jjoey.sportseco.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.jjoey.sportseco.R;
 import com.jjoey.sportseco.activities.SessionsActivity;
 import com.jjoey.sportseco.models.Sessions;
@@ -19,15 +22,17 @@ import java.util.List;
 
 public class SessionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private static final String TAG = SessionsAdapter.class.getSimpleName();
+
     private final Context context;
-    private List<Object> itemsList;
+    private List<Sessions> itemsList;
 
-    public static final int HEADER_VIEW = 0;
-    public static final int ITEMS_VIEW = 1;
+    private ColorGenerator generator;
 
-    public SessionsAdapter(Context context, List<Object> itemsList) {
+    public SessionsAdapter(Context context, List<Sessions> itemsList) {
         this.context = context;
         this.itemsList = itemsList;
+        generator= ColorGenerator.MATERIAL;
     }
 
     @Override
@@ -38,21 +43,31 @@ public class SessionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewholder, int position) {
-            Sessions bodyItem = (Sessions) itemsList.get(position);
-            SessionsBodyViewHolder holder = (SessionsBodyViewHolder) viewholder;
+        final Sessions bodyItem = (Sessions) itemsList.get(position);
+        SessionsBodyViewHolder holder = (SessionsBodyViewHolder) viewholder;
 
-            holder.sessionNameTV.setText(bodyItem.getSessionName());
-            Picasso.with(context)
-                    .load(bodyItem.getSessionIcon())
-                    .placeholder(R.drawable.basketball)
-                    .into(holder.session_bodyIV);
+        holder.sessionNameTV.setText(bodyItem.getSessionName());
+        String drawable = String.valueOf(String.valueOf(itemsList.get(position)).charAt(0));
+        String drawable1 = String.valueOf(String.valueOf(itemsList.get(position)).charAt(1));
 
-            holder.rowLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    context.startActivity(new Intent(context, SessionsActivity.class));
-                }
-            });
+        String letterDrawable = drawable.concat(drawable1);
+        TextDrawable textDrawable = TextDrawable.builder().buildRound(letterDrawable, generator.getRandomColor());
+        ((SessionsBodyViewHolder) viewholder).session_bodyIV.setImageDrawable(textDrawable);
+
+//            Picasso.with(context)
+//                    .load(bodyItem.getSessionIcon())
+//                    .placeholder(R.drawable.basketball)
+//                    .into(holder.session_bodyIV);
+
+        holder.rowLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, SessionsActivity.class);
+                intent.putExtra("prg_sess_id", bodyItem.getProgramSessionId());
+                Log.d(TAG, "Sess id in intent:\t " + bodyItem.getProgramSessionId());
+                context.startActivity();
+            }
+        });
     }
 
     @Override
@@ -61,17 +76,6 @@ public class SessionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return 0;
         }
         return itemsList.size();
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (isPositionHeader(position))
-            return HEADER_VIEW;
-        return ITEMS_VIEW;
-    }
-
-    private boolean isPositionHeader(int position) {
-        return position == 0;
     }
 
 }

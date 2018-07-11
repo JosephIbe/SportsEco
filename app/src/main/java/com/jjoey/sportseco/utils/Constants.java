@@ -14,7 +14,7 @@ public class Constants {
 
     public static final String COACH_PROGRAM_LIST = BASE_URL + "/coach_program_list/";
 
-    public static final String SESSION_LIST = BASE_URL + "/coach_program_session_list"; // coach_id, batch_id, prg_id, prg_user_map_id (int)
+    public static final String SESSION_LIST = BASE_URL + "/coach_program_session_list";
 
     public static final String COACH_PLAYER_LIST = BASE_URL + "/coach_player_list"; // coach_id, academy_id, batch_id, prg_user_map_id, prg_session_id (int)
 

@@ -26,6 +26,8 @@ public class FeedbackActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private ViewPagerAdapter pagerAdapter;
 
+    private String coachId = null, batchId = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +55,20 @@ public class FeedbackActivity extends AppCompatActivity {
     }
 
     private void setUpViewPager(ViewPager viewPager) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString("coach_id", coachId);
+        bundle.putString("batch_id", batchId);
+
+        CreateFeedbackFragment cf = new CreateFeedbackFragment();
+        cf.setArguments(bundle);
+
+        FeedbackHistoryFragment fhf = new FeedbackHistoryFragment();
+        fhf.setArguments(bundle);
+
         pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragTab(new CreateFeedbackFragment(), "ADD FEEDBACK");
-        pagerAdapter.addFragTab(new FeedbackHistoryFragment(), "FEEDBACK HISTORY");
+        pagerAdapter.addFragTab(cf, "ADD FEEDBACK");
+        pagerAdapter.addFragTab(fhf, "FEEDBACK HISTORY");
         viewPager.setAdapter(pagerAdapter);
     }
 
