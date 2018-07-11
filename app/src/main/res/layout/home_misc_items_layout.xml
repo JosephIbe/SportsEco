@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/miscImg"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/basketball"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/miscTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Focal Points"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:maxLines="2"
+            android:maxLength="8"
+            android:inputType="textMultiLine"
+            android:scrollHorizontally="false"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="3dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

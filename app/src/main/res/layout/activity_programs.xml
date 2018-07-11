@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ProgramsActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+
+        <com.github.sundeepk.compactcalendarview.CompactCalendarView
+            android:id="@+id/calView"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            app:compactCalendarTextSize="20sp"
+            app:compactCalendarCurrentDayTextColor="@color/colorAccent"
+            app:compactCalendarTextColor="#f47742"
+            app:compactCalendarMultiEventIndicatorColor="#42a4f4"
+            app:compactCalendarOtherMonthDaysTextColor="@color/colorPrimary"
+            app:compactCalendarBackgroundColor="#FFF"
+            app:compactCalendarCurrentDayBackgroundColor="#42f4a1"
+            app:compactCalendarCurrentSelectedDayBackgroundColor="#c2c2c2"
+            app:compactCalendarCurrentSelectedDayTextColor="#42e2f4"
+            app:compactCalendarDisplayOtherMonthDays="true"
+            app:compactCalendarTargetHeight="400dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

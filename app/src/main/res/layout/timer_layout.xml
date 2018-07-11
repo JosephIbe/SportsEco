@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_start_session">
+
+    <TextView
+        android:id="@+id/sessionTimerTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="30:59:45"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"/>
+
+    <ProgressBar
+        android:id="@+id/progressCountDown"
+        android:progressDrawable="@drawable/circle_progress_shape"
+        android:background="@drawable/circle_hollow_shape"
+        android:minWidth="290dp"
+        android:minHeight="250dp"
+        android:rotation="90"
+        android:progress="100"
+        android:max="100"
+        android:indeterminate="false"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

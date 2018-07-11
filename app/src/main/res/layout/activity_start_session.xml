@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.StartSessionActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        android:minHeight="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/backIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/back"
+                android:padding="5dp"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="10dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/layoutAlpha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/darker_gray"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <include layout="@layout/timer_layout"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:weightSum="3"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp">
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/startSessionFAB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/play"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"/>
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/pauseSessionFAB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/pause"
+                        android:visibility="gone"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"/>
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/stopSessionFAB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/stop"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        android:layout_marginRight="10dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/drillsRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/layoutAlpha"
+            android:layout_marginTop="15dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
