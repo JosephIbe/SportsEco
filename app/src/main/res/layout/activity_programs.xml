@@ -24,23 +24,22 @@
             android:layout_centerInParent="true"
             android:visibility="gone"/>
 
-        <com.github.sundeepk.compactcalendarview.CompactCalendarView
-            android:id="@+id/calView"
-            android:layout_width="match_parent"
-            android:layout_height="450dp"
-            app:compactCalendarTextSize="20sp"
-            app:compactCalendarCurrentDayTextColor="@color/colorAccent"
-            app:compactCalendarTextColor="#f47742"
-            app:compactCalendarMultiEventIndicatorColor="#42a4f4"
-            app:compactCalendarOtherMonthDaysTextColor="@color/colorPrimary"
-            app:compactCalendarBackgroundColor="#FFF"
-            app:compactCalendarCurrentDayBackgroundColor="#42f4a1"
-            app:compactCalendarCurrentSelectedDayBackgroundColor="#c2c2c2"
-            app:compactCalendarCurrentSelectedDayTextColor="#42e2f4"
-            app:compactCalendarDisplayOtherMonthDays="true"
-            app:compactCalendarTargetHeight="400dp"
-            android:layout_centerInParent="true"
-            android:layout_margin="10dp"/>
+        <!--<com.alamkanak.weekview.WeekView-->
+            <!--android:id="@+id/weekView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--app:eventTextColor="@android:color/white"-->
+            <!--app:textSize="12sp"-->
+            <!--app:hourHeight="60dp"-->
+            <!--app:headerColumnPadding="8dp"-->
+            <!--app:headerColumnTextColor="#8f000000"-->
+            <!--app:headerRowPadding="12dp"-->
+            <!--app:columnGap="8dp"-->
+            <!--app:noOfVisibleDays="3"-->
+            <!--app:headerRowBackgroundColor="#ffefefef"-->
+            <!--app:dayBackgroundColor="#05000000"-->
+            <!--app:todayBackgroundColor="#1848adff"-->
+            <!--app:headerColumnBackground="#ffffffff"/>-->
 
     </RelativeLayout>
 

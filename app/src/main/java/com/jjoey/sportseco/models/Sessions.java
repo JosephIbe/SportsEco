@@ -25,6 +25,18 @@ public class Sessions extends Model {
     @Column(name = "program_name")
     public String programName;
 
+    @Column(name = "session_desc")
+    public String sessionDesc;
+
+    @Column(name = "session_video_link")
+    public String sessionVideoLink;
+
+    @Column(name = "session_image")
+    public String sessionCoverImage;
+
+    @Column(name = "session_focus_points")
+    public String sessionFocusPoints;
+
     @Column(name = "session_date_time")
     public String dateTime;
 
@@ -34,11 +46,16 @@ public class Sessions extends Model {
     public Sessions() {
     }
 
-    public Sessions(String sessionName, String programSessionId, String programId, String programName, String dateTime, String coachId) {
+    public Sessions(int sessionIcon, String sessionName, String programSessionId, String programId, String programName, String sessionDesc, String sessionVideoLink, String sessionCoverImage, String sessionFocusPoints, String dateTime, String coachId) {
+        this.sessionIcon = sessionIcon;
         this.sessionName = sessionName;
         this.programSessionId = programSessionId;
         this.programId = programId;
         this.programName = programName;
+        this.sessionDesc = sessionDesc;
+        this.sessionVideoLink = sessionVideoLink;
+        this.sessionCoverImage = sessionCoverImage;
+        this.sessionFocusPoints = sessionFocusPoints;
         this.dateTime = dateTime;
         this.coachId = coachId;
     }
@@ -81,6 +98,38 @@ public class Sessions extends Model {
 
     public void setProgramName(String programName) {
         this.programName = programName;
+    }
+
+    public String getSessionDesc() {
+        return sessionDesc;
+    }
+
+    public void setSessionDesc(String sessionDesc) {
+        this.sessionDesc = sessionDesc;
+    }
+
+    public String getSessionVideoLink() {
+        return sessionVideoLink;
+    }
+
+    public void setSessionVideoLink(String sessionVideoLink) {
+        this.sessionVideoLink = sessionVideoLink;
+    }
+
+    public String getSessionCoverImage() {
+        return sessionCoverImage;
+    }
+
+    public void setSessionCoverImage(String sessionCoverImage) {
+        this.sessionCoverImage = sessionCoverImage;
+    }
+
+    public String getSessionFocusPoints() {
+        return sessionFocusPoints;
+    }
+
+    public void setSessionFocusPoints(String sessionFocusPoints) {
+        this.sessionFocusPoints = sessionFocusPoints;
     }
 
     public String getDateTime() {

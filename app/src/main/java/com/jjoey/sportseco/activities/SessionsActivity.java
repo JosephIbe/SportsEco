@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jjoey.sportseco.R;
+import com.squareup.picasso.Picasso;
 
 public class SessionsActivity extends AppCompatActivity {
 
@@ -24,6 +25,9 @@ public class SessionsActivity extends AppCompatActivity {
 
     private com.github.clans.fab.FloatingActionButton attendanceFAB, sessionFAB;
 
+    private Intent intent = null;
+    private String name_session = null, progSessId = null, desc = null, cover_img = null, focus_points = null, video_link = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +35,8 @@ public class SessionsActivity extends AppCompatActivity {
 
         init();
         setSupportActionBar(toolbar);
+
+        setMeta();
 
         backIV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,16 +48,37 @@ public class SessionsActivity extends AppCompatActivity {
         attendanceFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SessionsActivity.this, AttendanceActivity.class));
+                intent = new Intent(SessionsActivity.this, AttendanceActivity.class);
+                intent.putExtra("prg_sess_id", progSessId);
+                startActivity(intent);
             }
         });
 
         sessionFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SessionsActivity.this, StartSessionActivity.class));
+                intent = new Intent(SessionsActivity.this, StartSessionActivity.class);
+                intent.putExtra("prg_sess_id", progSessId);
+                startActivity(intent);
             }
         });
+
+    }
+
+    private void setMeta() {
+        progSessId = getIntent().getExtras().getString("prg_sess_id");
+        name_session = getIntent().getExtras().getString("session_name");
+        desc = getIntent().getExtras().getString("session_desc");
+        cover_img = getIntent().getExtras().getString("session_cover_image");
+        focus_points = getIntent().getExtras().getString("session_focus_pts");
+        video_link = getIntent().getExtras().getString("session_video_link");
+
+        sessionNameTxt.setText(name_session);
+        sessionDescTxt.setText(desc);
+        Picasso.with(this)
+                .load(cover_img)
+                .placeholder(R.drawable.basketball)
+                .into(sessionCoverImg);
 
     }
 

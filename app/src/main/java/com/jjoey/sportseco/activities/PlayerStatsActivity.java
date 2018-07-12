@@ -12,6 +12,6 @@ public class PlayerStatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_stats);
 
-        // TODO: 7/2/2018 Search Filters for player info
+        // TODO: 7/2/2018 Search Filters for playerSession info
     }
 }

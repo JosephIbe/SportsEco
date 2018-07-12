@@ -8,17 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jjoey.sportseco.R;
-import com.jjoey.sportseco.models.Attendance;
+import com.jjoey.sportseco.models.PlayerSession;
 import com.jjoey.sportseco.viewholders.AttendanceViewHolder;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceViewHolder> {
 
     private final Context context;
-    private List<Attendance> itemsList;
+//    private List<Attendance> itemsList;
+    private List<PlayerSession> itemsList;
 
-    public AttendanceAdapter(Context context, List<Attendance> itemsList) {
+    public AttendanceAdapter(Context context, List<PlayerSession> itemsList) {
         this.context = context;
         this.itemsList = itemsList;
     }
@@ -31,9 +33,22 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceViewHolder
 
     @Override
     public void onBindViewHolder(AttendanceViewHolder viewholder, int position) {
-        Attendance attendance = itemsList.get(position);
-        viewholder.playerNameTV.setText(attendance.getPlayer().getPlayerName());
-        viewholder.attendanceCheckBox.setChecked(attendance.getPlayer().isPresent());
+        PlayerSession playerSession = itemsList.get(position);
+
+        String fName = playerSession.getFirstName_player();
+        String lName = playerSession.getLastName_player();
+
+        String name = fName.concat("\t" + lName);
+
+        viewholder.playerNameTV.setText(name);
+        Picasso.with(context)
+                .load(playerSession.getImageURL())
+                .placeholder(R.drawable.person_avatar)
+                .into(viewholder.circleImageView);
+
+//        Attendance attendance = itemsList.get(position);
+//        viewholder.playerNameTV.setText(attendance.getPlayerSession().getFirstName_player());
+//        viewholder.attendanceCheckBox.setChecked(attendance.getPlayerSession().isPresent());
     }
 
     @Override

@@ -119,7 +119,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="5dp"
                                 android:layout_marginBottom="10dp"
-                                android:text="You cannot win matches without scoring points so it's important your players can shoot accurately.
+                                tools:text="You cannot win matches without scoring points so it's important your players can shoot accurately.
 
 To teach correct shooting technique we use BEEF:
 

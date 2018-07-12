@@ -3,21 +3,34 @@ package com.jjoey.sportseco.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.activeandroid.query.Select;
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.jjoey.sportseco.R;
 import com.jjoey.sportseco.adapters.AttendanceAdapter;
-import com.jjoey.sportseco.models.Attendance;
-import com.jjoey.sportseco.models.Player;
+import com.jjoey.sportseco.models.Batch;
+import com.jjoey.sportseco.models.Coach;
+import com.jjoey.sportseco.models.PlayerSession;
+import com.jjoey.sportseco.models.ProgramDetails;
+import com.jjoey.sportseco.utils.Constants;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class AttendanceActivity extends AppCompatActivity {
@@ -29,8 +42,12 @@ public class AttendanceActivity extends AppCompatActivity {
     private ImageView backIV, checkAttendance;
 
     private RecyclerView attendanceRV;
-    private List<Attendance> arrayList = new ArrayList<>();
+//    private List<Attendance> arrayList = new ArrayList<>();
+    private List<PlayerSession> arrayList = new ArrayList<>();
     private AttendanceAdapter adapter;
+
+    private String coachId = null, batchId = null, academyId = null, progUserMapId = null, progSessId = null;
+    private PlayerSession playerSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +60,14 @@ public class AttendanceActivity extends AppCompatActivity {
         backIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AttendanceActivity.this, SessionsActivity.class));
+                startActivity(new Intent(AttendanceActivity.this, HomeActivity.class));
             }
         });
 
         checkAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AttendanceActivity.this, SessionsActivity.class));
+                startActivity(new Intent(AttendanceActivity.this, HomeActivity.class));
             }
         });
 
@@ -63,42 +80,148 @@ public class AttendanceActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         attendanceRV.setLayoutManager(llm);
-        attendanceRV.addItemDecoration(new DividerItemDecoration(this, llm.getOrientation()));
+        LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall_down);
+        attendanceRV.setLayoutAnimation(controller);
 
-        Attendance attendance = new Attendance();
-        attendance.setAttendanceDate(new Date());
-        Player player = new Player();
-        player.setPlayerName("Michael Jordan");
-        player.setPresent(true);
-        attendance.setPlayer(player);
-        arrayList.add(attendance);
+//        attendanceRV.addItemDecoration(new DividerItemDecoration(this, llm.getOrientation()));
 
-        Attendance attendance1 = new Attendance();
-        attendance1.setAttendanceDate(new Date());
-        Player player1 = new Player();
-        player1.setPlayerName("Lebron James");
-        player1.setPresent(true);
-        attendance1.setPlayer(player1);
-        arrayList.add(attendance1);
+//        Attendance attendance = new Attendance();
+//        attendance.setAttendanceDate(new Date());
+//        PlayerSession playerSession = new PlayerSession();
+//        playerSession.setFirstName_player("Michael Jordan");
+//        playerSession.setPresent(true);
+//        attendance.setPlayerSession(playerSession);
+//        arrayList.add(attendance);
+//
+//        Attendance attendance1 = new Attendance();
+//        attendance1.setAttendanceDate(new Date());
+//        PlayerSession player1 = new PlayerSession();
+//        player1.setFirstName_player("Lebron James");
+//        player1.setPresent(true);
+//        attendance1.setPlayerSession(player1);
+//        arrayList.add(attendance1);
+//
+//        Attendance attendance2 = new Attendance();
+//        attendance2.setAttendanceDate(new Date());
+//        PlayerSession player2 = new PlayerSession();
+//        player2.setFirstName_player("Michael Phelps");
+//        player2.setPresent(false);
+//        attendance2.setPlayerSession(player2);
+//        arrayList.add(attendance2);
+//
+//        Attendance attendance3 = new Attendance();
+//        attendance3.setAttendanceDate(new Date());
+//        PlayerSession player3 = new PlayerSession();
+//        player3.setFirstName_player("Steph Curry");
+//        player3.setPresent(true);
+//        attendance3.setPlayerSession(player3);
+//        arrayList.add(attendance3);
 
-        Attendance attendance2 = new Attendance();
-        attendance2.setAttendanceDate(new Date());
-        Player player2 = new Player();
-        player2.setPlayerName("Michael Phelps");
-        player2.setPresent(false);
-        attendance2.setPlayer(player2);
-        arrayList.add(attendance2);
+        Coach coach = new Select()
+                .from(Coach.class)
+                .orderBy("id ASC")
+                .executeSingle();
+        coachId = coach.coachId;
+        academyId = coach.academyId;
 
-        Attendance attendance3 = new Attendance();
-        attendance3.setAttendanceDate(new Date());
-        Player player3 = new Player();
-        player3.setPlayerName("Steph Curry");
-        player3.setPresent(true);
-        attendance3.setPlayer(player3);
-        arrayList.add(attendance3);
+        Batch batch = new Select()
+                .from(Batch.class)
+                .orderBy("id ASC")
+                .executeSingle();
+        batchId = batch.batchId;
+        Log.d(TAG, "Coach id:\t" + coachId + "\t batch id:\t" + batchId + "\t academy id:\t" + academyId);
 
-        adapter = new AttendanceAdapter(this, arrayList);
-        attendanceRV.setAdapter(adapter);
+        ProgramDetails details = new Select()
+                .from(ProgramDetails.class)
+                .where("coach_id=?", coachId)
+                .executeSingle();
+        progUserMapId = details.getProgUserMapId();
+        Log.d(TAG, "Prog user mid:\t" + progUserMapId);
+
+        progSessId = getIntent().getExtras().getString("prg_sess_id");
+        Log.d(TAG, "Prog sessid:\t" + progSessId);
+
+        if (playerList().size() > 0){
+            arrayList = playerList();
+            Log.d(TAG, "PlayerSession List Size DB:\t" + arrayList.size());
+            adapter = new AttendanceAdapter(AttendanceActivity.this, arrayList);
+            attendanceRV.setAdapter(adapter);
+        } else {
+            fetchPlayersForSession(coachId, batchId, progSessId, progUserMapId, academyId);
+        }
+
+    }
+
+    private List<PlayerSession> playerList(){
+        return new Select()
+                .from(PlayerSession.class)
+                .orderBy("id ASC")
+                .execute();
+    }
+
+    private void fetchPlayersForSession(String coachId, String batchId, String progSessId, String progUserMapId, String academyId) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("coach_id", coachId);
+            jsonObject.put("batch_id", batchId);
+            jsonObject.put("prg_session_id", progSessId);
+            jsonObject.put("prg_user_map_id", progUserMapId);
+            jsonObject.put("academy_id", academyId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        AndroidNetworking.post(Constants.COACH_PLAYER_LIST_SESSION)
+                .addJSONObjectBody(jsonObject)
+                .setTag("Get Players List for Session")
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        if (response != null) {
+                            Log.d(TAG, "Attendance Resp:\t" + response.toString());
+                            try {
+                                JSONObject object = new JSONObject(response.toString());
+                                JSONArray arr = object.getJSONArray("players");
+                                for (int m = 0; m < arr.length(); m++){
+                                    JSONObject info = arr.getJSONObject(m);
+
+                                    playerSession = new PlayerSession();
+                                    playerSession.setUserId_player(info.getString("user_id"));
+                                    playerSession.setImageURL(info.getString("image"));
+                                    playerSession.setFirstName_player(info.getString("first_name"));
+                                    playerSession.setLastName_player(info.getString("last_name"));
+                                    playerSession.setUsername(info.getString("username"));
+                                    playerSession.setAddress_player(info.getString("address"));
+                                    playerSession.setBatcName_player(info.getString("batch_name"));
+                                    playerSession.setBatchId_player(info.getString("batch_id"));
+                                    playerSession.setProgramName_player(info.getString("prg_name"));
+                                    playerSession.setProgramIdPayer(info.getString("prg_id"));
+                                    playerSession.setProgramUserMapId_player(info.getString("prg_user_map_id"));
+                                    playerSession.setStartDate_player(info.getString("prg_start_date"));
+                                    playerSession.setEndDate_player(info.getString("prg_end_date"));
+                                    playerSession.setAttendanceStatus_player(info.getString("att_status"));
+
+                                    playerSession.save();
+
+                                    arrayList = playerList();
+                                    Log.d(TAG, "PlayerSession List Size:\t" + arrayList.size());
+                                    adapter = new AttendanceAdapter(AttendanceActivity.this, arrayList);
+                                    attendanceRV.setAdapter(adapter);
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
 
     }
 
@@ -110,4 +233,9 @@ public class AttendanceActivity extends AppCompatActivity {
         attendanceRV = findViewById(R.id.attendanceRV);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(AttendanceActivity.this, HomeActivity.class));
+    }
 }

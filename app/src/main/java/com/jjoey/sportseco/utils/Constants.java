@@ -2,11 +2,11 @@ package com.jjoey.sportseco.utils;
 
 public class Constants {
 
-    public static final String VID_URL = "https://www.youtube.com/watch?v=fI-XfjQCDwM";
-
     public static final String BASE_URL = "http://devsports.copycon.in/api";
 
     public static final String SUCCESS_MSG = "success";
+
+    public static final String VID_OF_DAY_URL = BASE_URL + "/get_video_today";
 
     public static final String LOGIN_COACH = BASE_URL + "/coach_login";
 
@@ -16,7 +16,9 @@ public class Constants {
 
     public static final String SESSION_LIST = BASE_URL + "/coach_program_session_list";
 
-    public static final String COACH_PLAYER_LIST = BASE_URL + "/coach_player_list"; // coach_id, academy_id, batch_id, prg_user_map_id, prg_session_id (int)
+    public static final String COACH_PLAYER_LIST = BASE_URL + "/players_under_coach";
+
+    public static final String COACH_PLAYER_LIST_SESSION = BASE_URL + "/coach_player_list"; // coach_id, academy_id, batch_id, prg_user_map_id, prg_session_id (int)
 
     public static final String PLAYER_ATTENDANCE = BASE_URL + "/program_player_attendance";
     //prg_user_map_id, prg_session_id, batch_id, coach_id (int), player_id (str arr), att_status (str_arr)

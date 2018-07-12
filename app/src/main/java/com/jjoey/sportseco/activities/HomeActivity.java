@@ -1,11 +1,11 @@
 package com.jjoey.sportseco.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -176,7 +176,7 @@ public class HomeActivity extends AppCompatActivity {
         ItemsDrawer drawer4 = new ItemsDrawer(R.drawable.basketball, "Attendance Records");
         itemsDrawerList.add(drawer4);
 
-        ItemsDrawer drawer5 = new ItemsDrawer(R.drawable.basketball, "Player Stats");
+        ItemsDrawer drawer5 = new ItemsDrawer(R.drawable.basketball, "PlayerSession Stats");
         itemsDrawerList.add(drawer5);
 
         drawerAdapter = new ItemsDrawerAdapter(this, itemsDrawerList);

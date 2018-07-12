@@ -5,14 +5,16 @@ import java.util.Date;
 public class Attendance {
 
     public Date attendanceDate;
-    public Player player;
+    public PlayerSession playerSession;
+    public boolean isPresent;
 
     public Attendance() {
     }
 
-    public Attendance(Date attendanceDate, Player player) {
+    public Attendance(Date attendanceDate, PlayerSession playerSession, boolean isPresent) {
         this.attendanceDate = attendanceDate;
-        this.player = player;
+        this.playerSession = playerSession;
+        this.isPresent = isPresent;
     }
 
     public Date getAttendanceDate() {
@@ -23,11 +25,19 @@ public class Attendance {
         this.attendanceDate = attendanceDate;
     }
 
-    public Player getPlayer() {
-        return player;
+    public PlayerSession getPlayerSession() {
+        return playerSession;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setPlayerSession(PlayerSession playerSession) {
+        this.playerSession = playerSession;
+    }
+
+    public boolean isPresent() {
+        return isPresent;
+    }
+
+    public void setPresent(boolean present) {
+        isPresent = present;
     }
 }

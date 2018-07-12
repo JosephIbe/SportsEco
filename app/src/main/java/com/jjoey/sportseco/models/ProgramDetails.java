@@ -31,15 +31,6 @@ public class ProgramDetails extends Model{
     public ProgramDetails() {
     }
 
-    public ProgramDetails(String programName, String progId, String progUserMapId, String startDate, String endDate, Batch batch) {
-        this.programName = programName;
-        this.progId = progId;
-        this.progUserMapId = progUserMapId;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.batch = batch;
-    }
-
     public ProgramDetails(String programName, String progId, String progUserMapId, String startDate, String endDate, Batch batch, String coachId) {
         this.programName = programName;
         this.progId = progId;

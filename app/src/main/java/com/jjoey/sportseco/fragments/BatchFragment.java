@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -19,7 +21,6 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.jjoey.sportseco.R;
-import com.jjoey.sportseco.activities.HomeActivity;
 import com.jjoey.sportseco.adapters.HomeMiscAdapter;
 import com.jjoey.sportseco.adapters.SessionsAdapter;
 import com.jjoey.sportseco.models.ProgramDetails;
@@ -47,6 +48,7 @@ public class BatchFragment extends Fragment {
     private SessionsAdapter adapter;
     private String programId, programUserMapId;
     private Sessions sessions;
+    private String videoURL;
 
     public BatchFragment() {
         // Required empty public constructor
@@ -115,6 +117,9 @@ public class BatchFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         sessionsRV.setLayoutManager(llm);
+        LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(getActivity()
+                , R.anim.layout_anim_fall_down);
+        sessionsRV.setLayoutAnimation(controller);
 
         List<ProgramDetails> details = new Select()
                 .from(ProgramDetails.class)
@@ -177,9 +182,13 @@ public class BatchFragment extends Fragment {
                                     String sessionName = obj.getString("session_name");
                                     String programName = obj.getString("prg_name");
                                     String programSessionId = (obj.getString("prg_session_id"));
+                                    String videoLink = (obj.getString("prg_session_video_link"));
+                                    String coverImage = obj.getString("prg_session_image");
+                                    String desc = obj.getString("prg_session_description");
+                                    String focusPoints = obj.getString("prg_session_focus_points");
                                     String dateTime = (obj.getString("date_time"));
 
-                                    saveSessionsInfo(programId, programName, sessionName, programSessionId, dateTime);
+                                    saveSessionsInfo(programId, programName, sessionName, programSessionId, videoLink, coverImage, desc, focusPoints, dateTime);
 
                                 }
                             } catch (JSONException e) {
@@ -195,11 +204,15 @@ public class BatchFragment extends Fragment {
                 });
     }
 
-    private void saveSessionsInfo(String programId, String programName, String sessionName, String programSessionId, String dateTime) {
+    private void saveSessionsInfo(String programId, String programName, String sessionName, String programSessionId, String videoLink, String coverImage, String desc, String focusPoints,  String dateTime) {
         sessions.setProgramId(programId);
         sessions.setSessionName(sessionName);
         sessions.setProgramName(programName);
         sessions.setProgramSessionId(programSessionId);
+        sessions.setSessionVideoLink(videoLink);
+        sessions.setSessionCoverImage(coverImage);
+        sessions.setSessionDesc(desc);
+        sessions.setSessionFocusPoints(focusPoints);
         sessions.setDateTime(dateTime);
         sessions.setCoachId(coachId);
 
@@ -214,17 +227,32 @@ public class BatchFragment extends Fragment {
 
     // TODO: 6/27/2018 complete vid of day
     private void initVideoOfDay() {
-        videoView.setVideoPath(Constants.VID_URL);
-        videoView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (videoView.isPlaying()) {
-                    videoView.pause();
-                } else {
-                    videoView.start();
-                }
-            }
-        });
+        AndroidNetworking.post(Constants.VID_OF_DAY_URL)
+                .setTag("Get Video of the Day")
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        if (response != null){
+                            Log.d(TAG, "Vid_day response:\t" + response.toString());
+                            try {
+                                JSONObject jsonObject = new JSONObject(response.toString());
+                                videoURL = jsonObject.getString("url");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
+
+        // TODO: 7/12/2018 Show Video from url
+
     }
 
 }

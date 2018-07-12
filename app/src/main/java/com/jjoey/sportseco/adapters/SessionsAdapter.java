@@ -64,8 +64,12 @@ public class SessionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             public void onClick(View view) {
                 Intent intent = new Intent(context, SessionsActivity.class);
                 intent.putExtra("prg_sess_id", bodyItem.getProgramSessionId());
-                Log.d(TAG, "Sess id in intent:\t " + bodyItem.getProgramSessionId());
-                context.startActivity();
+                intent.putExtra("session_name", bodyItem.getSessionName());
+                intent.putExtra("session_desc", bodyItem.getSessionDesc());
+                intent.putExtra("session_cover_image", bodyItem.getSessionCoverImage());
+                intent.putExtra("session_video_link", bodyItem.getSessionVideoLink());
+                intent.putExtra("session_focus_pts", bodyItem.getSessionFocusPoints());
+                context.startActivity(intent);
             }
         });
     }
