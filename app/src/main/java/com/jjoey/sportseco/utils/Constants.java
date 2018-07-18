@@ -18,7 +18,9 @@ public class Constants {
 
     public static final String COACH_PLAYER_LIST = BASE_URL + "/players_under_coach";
 
-    public static final String COACH_PLAYER_LIST_SESSION = BASE_URL + "/coach_player_list"; // coach_id, academy_id, batch_id, prg_user_map_id, prg_session_id (int)
+    public static final String COACH_PLAYER_LIST_SESSION = BASE_URL + "/coach_player_list";
+
+    public static final String SESSION_DRILLS_API = BASE_URL + "/session_drills"; // prg_session_id, prg_id
 
     public static final String PLAYER_ATTENDANCE = BASE_URL + "/program_player_attendance";
     //prg_user_map_id, prg_session_id, batch_id, coach_id (int), player_id (str arr), att_status (str_arr)

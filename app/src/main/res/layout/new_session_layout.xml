@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?android:attr/actionBarSize">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/backIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:id="@+id/session_nameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+                tools:text="Session Name" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <FrameLayout
+            android:id="@+id/drillsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3d3d3d"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <RelativeLayout
+                android:id="@+id/pausePlayLayout"
+                android:layout_width="130dp"
+                android:layout_height="120dp"
+                android:layout_alignParentStart="true"
+                android:layout_weight="0.02">
+
+                <ProgressBar
+                    android:id="@+id/fabProgress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="130dp"
+                    android:layout_height="120dp"
+                    android:layout_centerVertical="true"
+                    android:indeterminate="false"
+                    android:progressDrawable="@drawable/timer_shape_2" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/playFAB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:src="@drawable/play"
+                    app:fabSize="normal" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/pauseFAB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:src="@drawable/pause"
+                    android:visibility="gone"
+                    app:fabSize="normal" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center_horizontal"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/timerTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/pausePlayLayout"
+                    android:textColor="@color/gray"
+                    android:textSize="30sp"
+                    tools:text="45:59" />
+
+                <TextView
+                    android:id="@+id/endTimerTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/timerTxt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:text="Session Over"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textAlignment="center"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/resetLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.02"
+                android:layout_marginLeft="10dp"
+                android:visibility="gone">
+
+                <ProgressBar
+                    android:id="@+id/resetProgress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_centerVertical="true"
+                    android:indeterminate="false"
+                    android:indeterminateTint="@color/gray"
+                    android:progressDrawable="@drawable/timer_shape_2" />
+
+                <TextView
+                    android:id="@+id/stopTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="STOP"
+                    android:textColor="@color/gray"
+                    android:textSize="17sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

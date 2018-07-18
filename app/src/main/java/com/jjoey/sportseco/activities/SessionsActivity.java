@@ -6,10 +6,13 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alespero.expandablecardview.ExpandableCardView;
 import com.jjoey.sportseco.R;
 import com.squareup.picasso.Picasso;
 
@@ -20,7 +23,8 @@ public class SessionsActivity extends AppCompatActivity {
     private AppBarLayout appBarLayout;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private Toolbar toolbar;
-    private TextView sessionNameTxt, sessionDescTxt;
+    private TextView sessionNameTxt, sessionDescTxt, focusPointsTV;
+    private ExpandableCardView focusCardLayout;
     private ImageView backIV, sessionCoverImg;
 
     private com.github.clans.fab.FloatingActionButton attendanceFAB, sessionFAB;
@@ -75,6 +79,13 @@ public class SessionsActivity extends AppCompatActivity {
 
         sessionNameTxt.setText(name_session);
         sessionDescTxt.setText(desc);
+//        Log.d(TAG, "FPtxt:\t" + focus_points);
+//        if (!TextUtils.isEmpty(focus_points)){
+//            focusCardLayout.setVisibility(View.VISIBLE);
+//            focusPointsTV.setText(focus_points);
+//        } else {
+//            focusCardLayout.setVisibility(View.GONE);
+//        }
         Picasso.with(this)
                 .load(cover_img)
                 .placeholder(R.drawable.basketball)
@@ -90,6 +101,8 @@ public class SessionsActivity extends AppCompatActivity {
         backIV = findViewById(R.id.backIV);
         sessionNameTxt = findViewById(R.id.sessionNameTxt);
         sessionDescTxt = findViewById(R.id.sessionDescTxt);
+        focusPointsTV = findViewById(R.id.focusPointsTV);
+        focusCardLayout = findViewById(R.id.focusCardLayout);
         attendanceFAB = findViewById(R.id.attendanceFAB);
         sessionFAB = findViewById(R.id.sessionFAB);
 

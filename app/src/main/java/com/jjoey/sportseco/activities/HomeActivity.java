@@ -179,6 +179,9 @@ public class HomeActivity extends AppCompatActivity {
         ItemsDrawer drawer5 = new ItemsDrawer(R.drawable.basketball, "PlayerSession Stats");
         itemsDrawerList.add(drawer5);
 
+        ItemsDrawer drawer6 = new ItemsDrawer(R.drawable.profile_head, "My Profile");
+        itemsDrawerList.add(drawer6);
+
         drawerAdapter = new ItemsDrawerAdapter(this, itemsDrawerList);
         drawerRV.setAdapter(drawerAdapter);
 
@@ -239,6 +242,9 @@ public class HomeActivity extends AppCompatActivity {
                         intent.putExtra("coach_id", coachId);
                         intent.putExtra("batch_id", id_batch);
                         startActivity(intent);
+                        break;
+                    case 7:
+                        Toast.makeText(HomeActivity.this, "Coach Profile Clicked", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.jjoey.sportseco"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -34,6 +34,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.alespero:expandable-cardview:0.8'
 //    implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
 //    implementation 'com.github.alamkanak:android-week-view:1.2.6'
     testImplementation 'junit:junit:4.12'
