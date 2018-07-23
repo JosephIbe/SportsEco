@@ -266,6 +266,7 @@ public class LoginActivity extends AppCompatActivity {
                                         homeIntent.putExtra("coach_id", id_coach);
                                         homeIntent.putExtra("batch_id", batch_id);
                                         startActivity(homeIntent);
+                                        finish();
                                     }
 
                                 }

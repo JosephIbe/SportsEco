@@ -13,9 +13,6 @@ public class Sessions extends Model {
     @Column(name = "session_name")
     public String sessionName;
 
-//    @Column(name = "program_details")
-//    public ProgramDetails programDetails;
-
     @Column(name = "program_session_id")
     public String programSessionId;
 

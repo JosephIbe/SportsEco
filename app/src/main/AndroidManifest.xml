@@ -19,6 +19,7 @@
         <meta-data
             android:name="AA_DB_VERSION"
             android:value="11011" />
+
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,10 +34,10 @@
         <activity android:name=".activities.SessionsActivity" />
         <activity android:name=".activities.AttendanceActivity" />
         <activity android:name=".activities.FeedbackActivity" />
-        <activity android:name=".activities.PlayerStatsActivity" />
         <activity android:name=".activities.StartSessionActivity" />
         <activity android:name=".activities.SelectBatchActivity" />
-        <activity android:name=".activities.ProgramsActivity"></activity>
+        <activity android:name=".activities.ProgramsActivity" />
+        <activity android:name=".activities.AllPlayersActivity"></activity>
     </application>
 
 </manifest>

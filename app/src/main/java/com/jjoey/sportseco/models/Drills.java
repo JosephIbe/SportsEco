@@ -2,31 +2,55 @@ package com.jjoey.sportseco.models;
 
 public class Drills {
 
-    public int drill_Id;
+    public String progId;
+    public String progSessId;
+    public String progSessionStepsId;
     public String drill_Title;
     public String drill_CoverImg;
-    public String[] imageURLs;
-    public double duration;
-    private Sessions sessions;
+    public String drillDesc;
+    public String drillVideo;
+    public String drillFocusPts;
+    public String drillStartTime;
+    public String drillEndTime;
 
     public Drills() {
     }
 
-    public Drills(int drill_Id, String drill_Title, String drill_CoverImg, String[] imageURLs, double duration, Sessions sessions) {
-        this.drill_Id = drill_Id;
+    public Drills(String progId, String progSessId, String progSessionStepsId, String drill_Title, String drill_CoverImg, String drillDesc, String drillVideo, String drillFocusPts, String drillStartTime, String drillEndTime) {
+        this.progId = progId;
+        this.progSessId = progSessId;
+        this.progSessionStepsId = progSessionStepsId;
         this.drill_Title = drill_Title;
         this.drill_CoverImg = drill_CoverImg;
-        this.imageURLs = imageURLs;
-        this.duration = duration;
-        this.sessions = sessions;
+        this.drillDesc = drillDesc;
+        this.drillVideo = drillVideo;
+        this.drillFocusPts = drillFocusPts;
+        this.drillStartTime = drillStartTime;
+        this.drillEndTime = drillEndTime;
     }
 
-    public int getDrill_Id() {
-        return drill_Id;
+    public String getProgId() {
+        return progId;
     }
 
-    public void setDrill_Id(int drill_Id) {
-        this.drill_Id = drill_Id;
+    public void setProgId(String progId) {
+        this.progId = progId;
+    }
+
+    public String getProgSessId() {
+        return progSessId;
+    }
+
+    public void setProgSessId(String progSessId) {
+        this.progSessId = progSessId;
+    }
+
+    public String getProgSessionStepsId() {
+        return progSessionStepsId;
+    }
+
+    public void setProgSessionStepsId(String progSessionStepsId) {
+        this.progSessionStepsId = progSessionStepsId;
     }
 
     public String getDrill_Title() {
@@ -45,27 +69,43 @@ public class Drills {
         this.drill_CoverImg = drill_CoverImg;
     }
 
-    public String[] getImageURLs() {
-        return imageURLs;
+    public String getDrillDesc() {
+        return drillDesc;
     }
 
-    public void setImageURLs(String[] imageURLs) {
-        this.imageURLs = imageURLs;
+    public void setDrillDesc(String drillDesc) {
+        this.drillDesc = drillDesc;
     }
 
-    public double getDuration() {
-        return duration;
+    public String getDrillVideo() {
+        return drillVideo;
     }
 
-    public void setDuration(double duration) {
-        this.duration = duration;
+    public void setDrillVideo(String drillVideo) {
+        this.drillVideo = drillVideo;
     }
 
-    public Sessions getSessions() {
-        return sessions;
+    public String getDrillFocusPts() {
+        return drillFocusPts;
     }
 
-    public void setSessions(Sessions sessions) {
-        this.sessions = sessions;
+    public void setDrillFocusPts(String drillFocusPts) {
+        this.drillFocusPts = drillFocusPts;
+    }
+
+    public String getDrillStartTime() {
+        return drillStartTime;
+    }
+
+    public void setDrillStartTime(String drillStartTime) {
+        this.drillStartTime = drillStartTime;
+    }
+
+    public String getDrillEndTime() {
+        return drillEndTime;
+    }
+
+    public void setDrillEndTime(String drillEndTime) {
+        this.drillEndTime = drillEndTime;
     }
 }

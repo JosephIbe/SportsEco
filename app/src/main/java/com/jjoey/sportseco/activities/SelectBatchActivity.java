@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -159,4 +160,16 @@ public class SelectBatchActivity extends AppCompatActivity {
         progress = findViewById(R.id.progress);
         recyclerView = findViewById(R.id.batchRV);
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.ACTION_DOWN){
+            super.onKeyDown(keyCode, event);
+            return true;
+        }
+        return false;
+
+    }
+
+
 }

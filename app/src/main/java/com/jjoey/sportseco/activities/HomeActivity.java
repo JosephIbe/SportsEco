@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -161,26 +162,32 @@ public class HomeActivity extends AppCompatActivity {
         ItemsHeader header = new ItemsHeader(R.drawable.court);
         itemsDrawerList.add(header);
 
-        ItemsDrawer drawer = new ItemsDrawer(R.drawable.basketball, "Sessions");
+        ItemsDrawer drawer = new ItemsDrawer(R.drawable.profile_head, "My Profile");
         itemsDrawerList.add(drawer);
 
-        ItemsDrawer drawer1 = new ItemsDrawer(R.drawable.basketball, "Feedback");
+        ItemsDrawer drawer1 = new ItemsDrawer(R.drawable.calendar, "Calendar");
         itemsDrawerList.add(drawer1);
 
-        ItemsDrawer drawer2 = new ItemsDrawer(R.drawable.basketball, "Batches");
+        ItemsDrawer drawer2 = new ItemsDrawer(R.drawable.basketball_players, "All Players");
         itemsDrawerList.add(drawer2);
 
-        ItemsDrawer drawer3 = new ItemsDrawer(R.drawable.basketball, "Programs");
+        ItemsDrawer drawer3 = new ItemsDrawer(R.drawable.programs, "Programs");
         itemsDrawerList.add(drawer3);
 
-        ItemsDrawer drawer4 = new ItemsDrawer(R.drawable.basketball, "Attendance Records");
+        ItemsDrawer drawer4 = new ItemsDrawer(R.drawable.basketball, "Batches");
         itemsDrawerList.add(drawer4);
 
-        ItemsDrawer drawer5 = new ItemsDrawer(R.drawable.basketball, "PlayerSession Stats");
+        ItemsDrawer drawer5 = new ItemsDrawer(R.drawable.attendance, "Attendance Stats");
         itemsDrawerList.add(drawer5);
 
-        ItemsDrawer drawer6 = new ItemsDrawer(R.drawable.profile_head, "My Profile");
+        ItemsDrawer drawer6 = new ItemsDrawer(R.drawable.feedback, "Feedback");
         itemsDrawerList.add(drawer6);
+
+        ItemsDrawer drawer7 = new ItemsDrawer(R.drawable.basketball, "Legal Disclaimer");
+        itemsDrawerList.add(drawer7);
+
+        ItemsDrawer drawer8 = new ItemsDrawer(R.drawable.basketball, "About Us");
+        itemsDrawerList.add(drawer8);
 
         drawerAdapter = new ItemsDrawerAdapter(this, itemsDrawerList);
         drawerRV.setAdapter(drawerAdapter);
@@ -212,20 +219,15 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view, int position) {
                 switch (position){
                     case 1:
-                        Toast.makeText(HomeActivity.this, "Sessions Clicked", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(HomeActivity.this, "My Profile Clicked", Toast.LENGTH_SHORT).show();
                         break;
 
                     case 2:
-                        intent = new Intent(HomeActivity.this, FeedbackActivity.class);
-                        intent.putExtra("coach_id", coachId);
-                        intent.putExtra("batch_id", id_batch);
-                        startActivity(intent);
+                        Toast.makeText(HomeActivity.this, "Calendar Soon", Toast.LENGTH_SHORT).show();
                         break;
 
                     case 3:
-                        intent = new Intent(HomeActivity.this, SelectBatchActivity.class);
-                        intent.putExtra("coach_id", coachId);
-                        startActivity(intent);
+                        startActivity(new Intent(HomeActivity.this, AllPlayersActivity.class));
                         break;
 
                     case 4:
@@ -233,18 +235,25 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
                     case 5:
+                        Toast.makeText(HomeActivity.this, "Batches Clicked", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 6:
                         Toast.makeText(HomeActivity.this, "Attendance Clicked", Toast.LENGTH_SHORT).show();
-//                        startActivity(new Intent(HomeActivity.this, HistoryAttendanceActivity.class));
                         break;
 
-                    case 6:
-                        intent = new Intent(HomeActivity.this, PlayerStatsActivity.class);
+                    case 7:
+                        intent = new Intent(HomeActivity.this, FeedbackActivity.class);
                         intent.putExtra("coach_id", coachId);
                         intent.putExtra("batch_id", id_batch);
                         startActivity(intent);
                         break;
-                    case 7:
-                        Toast.makeText(HomeActivity.this, "Coach Profile Clicked", Toast.LENGTH_SHORT).show();
+
+                    case 8:
+                        Toast.makeText(HomeActivity.this, "Disclaimer Clicked", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case 9:
+                        Toast.makeText(HomeActivity.this, "About Clicked", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -257,6 +266,32 @@ public class HomeActivity extends AppCompatActivity {
         drawerIcon = findViewById(R.id.drawerIcon);
         drawerLayout = findViewById(R.id.drawerLayout);
         drawerRV = findViewById(R.id.drawerRV);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (drawerLayout.isDrawerOpen(GravityCompat.END)){
+            drawerLayout.closeDrawer(GravityCompat.END);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (drawerLayout.isDrawerOpen(GravityCompat.END)){
+            drawerLayout.closeDrawer(GravityCompat.END);
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.ACTION_DOWN){
+            super.onKeyDown(keyCode, event);
+            return true;
+        }
+        return false;
+
     }
 
 }

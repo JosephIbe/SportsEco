@@ -3,15 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.StartSessionActivity">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/toolbar"
-        android:minHeight="?android:attr/actionBarSize"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:minHeight="?android:attr/actionBarSize">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -21,84 +20,149 @@
                 android:id="@+id/backIV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/back"
-                android:padding="5dp"/>
+                android:padding="5dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:id="@+id/session_nameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+                tools:text="Session Name" />
 
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
-        android:layout_below="@id/toolbar"
-        android:layout_marginTop="10dp">
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/layoutAlpha"
+        <FrameLayout
+            android:id="@+id/drillsContainer"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:backgroundTint="@android:color/secondary_text_light"
-            app:cardElevation="10dp"
-            app:cardCornerRadius="10dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp">
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3d3d3d"
+            android:orientation="horizontal"
+            android:weightSum="3">
 
-                <include layout="@layout/circle_progress_layout"/>
+            <RelativeLayout
+                android:id="@+id/pausePlayLayout"
+                android:layout_width="130dp"
+                android:layout_height="120dp"
+                android:layout_alignParentStart="true"
+                android:layout_weight="0.02">
 
-                <LinearLayout
+                <ProgressBar
+                    android:id="@+id/fabProgress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="130dp"
+                    android:layout_height="120dp"
+                    android:layout_centerVertical="true"
+                    android:indeterminate="false"
+                    android:progressDrawable="@drawable/timer_shape_2" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/playFAB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:src="@drawable/play"
+                    app:fabSize="normal" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/pauseFAB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="5dp">
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:src="@drawable/pause"
+                    android:visibility="gone"
+                    app:fabSize="normal" />
 
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/startSessionFAB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/play"
-                        android:layout_weight="1"
-                        android:layout_marginRight="10dp"/>
+            </RelativeLayout>
 
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/pauseSessionFAB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/pause"
-                        android:visibility="visible"
-                        android:layout_weight="1"
-                        android:layout_marginRight="10dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center_horizontal"
+                android:layout_weight="1">
 
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/stopSessionFAB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/stop"
-                        android:layout_weight="1"
-                        android:visibility="visible"
-                        android:layout_marginRight="10dp"/>
+                <TextView
+                    android:id="@+id/timerTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/pausePlayLayout"
+                    android:textColor="@color/gray"
+                    android:textSize="30sp"
+                    tools:text="45:59" />
 
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/endTimerTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/timerTxt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:text="Session Over"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textAlignment="center"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+            <RelativeLayout
+                android:id="@+id/resetLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.02"
+                android:layout_marginLeft="10dp"
+                android:visibility="gone">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/drillsRV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/layoutAlpha"
-            android:layout_marginTop="15dp"/>
+                <ProgressBar
+                    android:id="@+id/resetProgress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_centerVertical="true"
+                    android:indeterminate="false"
+                    android:indeterminateTint="@color/gray"
+                    android:progressDrawable="@drawable/timer_shape_2" />
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/stopTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="STOP"
+                    android:textColor="@color/gray"
+                    android:textSize="17sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

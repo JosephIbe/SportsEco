@@ -39,12 +39,17 @@ public class FeedbackActivity extends AppCompatActivity {
         backIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(FeedbackActivity.this, HomeActivity.class));
+                startHomeActivity();
             }
         });
 
         setUpTabs();
 
+    }
+
+    private void startHomeActivity() {
+        startActivity(new Intent(FeedbackActivity.this, HomeActivity.class));
+        finish();
     }
 
     private void setUpTabs() {
@@ -67,7 +72,7 @@ public class FeedbackActivity extends AppCompatActivity {
         fhf.setArguments(bundle);
 
         pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragTab(cf, "ADD FEEDBACK");
+        pagerAdapter.addFragTab(cf, "ADD NEW FEEDBACK");
         pagerAdapter.addFragTab(fhf, "FEEDBACK HISTORY");
         viewPager.setAdapter(pagerAdapter);
     }
@@ -79,4 +84,9 @@ public class FeedbackActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startHomeActivity();
+    }
 }

@@ -1,13 +1,14 @@
-package com.jjoey.sportseco.fragments;
+package com.jjoey.sportseco.activities;
 
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.activeandroid.query.Select;
 import com.androidnetworking.AndroidNetworking;
@@ -16,15 +17,10 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.jjoey.sportseco.R;
 import com.jjoey.sportseco.adapters.AllPlayersAdapter;
-import com.jjoey.sportseco.adapters.FeedbackAdapter;
-import com.jjoey.sportseco.adapters.SessionsAdapter;
 import com.jjoey.sportseco.models.AllPlayers;
 import com.jjoey.sportseco.models.Batch;
 import com.jjoey.sportseco.models.Coach;
-import com.jjoey.sportseco.models.ProgramDetails;
-import com.jjoey.sportseco.models.Sessions;
 import com.jjoey.sportseco.utils.Constants;
-import com.jjoey.sportseco.utils.EmptyRecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,42 +29,67 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class CreateFeedbackFragment extends Fragment {
+public class AllPlayersActivity extends AppCompatActivity {
 
-    private static final String TAG = CreateFeedbackFragment.class.getSimpleName();
+    private static final String TAG = AllPlayersActivity.class.getSimpleName();
 
-    private EmptyRecyclerView createRV;
     private String coachId = null, batchId = null;
+
+    private Toolbar toolbar;
+    private ImageView backIV;
+    private RecyclerView allPlayersRV;
+    private LinearLayoutManager llm;
 
     private AllPlayers players;
     private List<AllPlayers> list = new ArrayList<>();
-    private FeedbackAdapter adapter;
-
-    public CreateFeedbackFragment() {
-        // Required empty public constructor
-    }
+    private AllPlayersAdapter adapter;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_all_players);
 
-        Coach coach = new Select()
-                .from(Coach.class)
-                .orderBy("id ASC")
-                .executeSingle();
-        coachId = coach.coachId;
+        getQueryInfo();
 
-        Log.d(TAG, "Coach id:\t" + coachId);
+        init();
+        setSupportActionBar(toolbar);
 
-        Batch batch = new Select()
-                .from(Batch.class)
-                .orderBy("id ASC")
-                .executeSingle();
-        batchId = batch.batchId;
+        backIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startHomeActivity();
+            }
+        });
 
+    }
+
+    private void startHomeActivity() {
+        startActivity(new Intent(AllPlayersActivity.this, HomeActivity.class));
+        finish();
+    }
+
+    private void init() {
+        toolbar = findViewById(R.id.toolbar);
+        backIV = findViewById(R.id.backIV);
+        allPlayersRV = findViewById(R.id.allPlayersRv);
+
+        setUpRV();
+
+        if (getList().size() > 0){
+            Log.d(TAG, "All Players from DB:\t" + getList().size());
+            list = getList();
+            adapter = new AllPlayersAdapter(this, list);
+            allPlayersRV.setAdapter(adapter);
+        } else {
+            fetchPlayersUnderCoach(coachId, batchId);
+        }
+
+    }
+
+    private void setUpRV() {
+        allPlayersRV.setHasFixedSize(true);
+        llm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        allPlayersRV.setLayoutManager(llm);
     }
 
     private void fetchPlayersUnderCoach(String coachId, String batchId) {
@@ -109,8 +130,8 @@ public class CreateFeedbackFragment extends Fragment {
 
                                     Log.d(TAG, "All Players first time:\t" + getList().size());
                                     list = getList();
-                                    adapter = new FeedbackAdapter(getActivity(), list);
-                                    createRV.setAdapter(adapter);
+                                    adapter = new AllPlayersAdapter(AllPlayersActivity.this, list);
+                                    allPlayersRV.setAdapter(adapter);
 
                                 }
                             } catch (JSONException e) {
@@ -135,28 +156,26 @@ public class CreateFeedbackFragment extends Fragment {
                 .execute();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_create_feedback, container, false);
 
-        createRV = v.findViewById(R.id.createRV);
+    private void getQueryInfo() {
+        Coach coach = new Select()
+                .from(Coach.class)
+                .orderBy("id ASC")
+                .executeSingle();
+        coachId = coach.coachId;
 
-        createRV.setHasFixedSize(true);
-        LinearLayoutManager vlm = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        createRV.setLayoutManager(vlm);
+        Log.d(TAG, "Coach id:\t" + coachId);
 
-        if (getList().size() > 0){
-            Log.d(TAG, "All Players from DB:\t" + getList().size());
-            list = getList();
-            adapter = new FeedbackAdapter(getActivity(), list);
-            createRV.setAdapter(adapter);
-        } else {
-            fetchPlayersUnderCoach(coachId, batchId);
-        }
-
-        return v;
+        Batch batch = new Select()
+                .from(Batch.class)
+                .orderBy("id ASC")
+                .executeSingle();
+        batchId = batch.batchId;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startHomeActivity();
+    }
 }

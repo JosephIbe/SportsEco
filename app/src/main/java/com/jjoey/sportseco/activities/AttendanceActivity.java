@@ -60,7 +60,7 @@ public class AttendanceActivity extends AppCompatActivity {
         backIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AttendanceActivity.this, HomeActivity.class));
+
             }
         });
 
@@ -82,40 +82,6 @@ public class AttendanceActivity extends AppCompatActivity {
         attendanceRV.setLayoutManager(llm);
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall_down);
         attendanceRV.setLayoutAnimation(controller);
-
-//        attendanceRV.addItemDecoration(new DividerItemDecoration(this, llm.getOrientation()));
-
-//        Attendance attendance = new Attendance();
-//        attendance.setAttendanceDate(new Date());
-//        PlayerSession playerSession = new PlayerSession();
-//        playerSession.setFirstName_player("Michael Jordan");
-//        playerSession.setPresent(true);
-//        attendance.setPlayerSession(playerSession);
-//        arrayList.add(attendance);
-//
-//        Attendance attendance1 = new Attendance();
-//        attendance1.setAttendanceDate(new Date());
-//        PlayerSession player1 = new PlayerSession();
-//        player1.setFirstName_player("Lebron James");
-//        player1.setPresent(true);
-//        attendance1.setPlayerSession(player1);
-//        arrayList.add(attendance1);
-//
-//        Attendance attendance2 = new Attendance();
-//        attendance2.setAttendanceDate(new Date());
-//        PlayerSession player2 = new PlayerSession();
-//        player2.setFirstName_player("Michael Phelps");
-//        player2.setPresent(false);
-//        attendance2.setPlayerSession(player2);
-//        arrayList.add(attendance2);
-//
-//        Attendance attendance3 = new Attendance();
-//        attendance3.setAttendanceDate(new Date());
-//        PlayerSession player3 = new PlayerSession();
-//        player3.setFirstName_player("Steph Curry");
-//        player3.setPresent(true);
-//        attendance3.setPlayerSession(player3);
-//        arrayList.add(attendance3);
 
         Coach coach = new Select()
                 .from(Coach.class)
@@ -233,9 +199,14 @@ public class AttendanceActivity extends AppCompatActivity {
         attendanceRV = findViewById(R.id.attendanceRV);
     }
 
+    private void startHomeActivity() {
+        startActivity(new Intent(AttendanceActivity.this, HomeActivity.class));
+        finish();
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(AttendanceActivity.this, HomeActivity.class));
+        startHomeActivity();
     }
 }

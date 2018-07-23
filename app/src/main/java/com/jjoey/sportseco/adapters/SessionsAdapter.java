@@ -32,7 +32,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public SessionsAdapter(Context context, List<Sessions> itemsList) {
         this.context = context;
         this.itemsList = itemsList;
-        generator= ColorGenerator.MATERIAL;
+        generator = ColorGenerator.MATERIAL;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewholder, int position) {
-        final Sessions bodyItem = (Sessions) itemsList.get(position);
+        final Sessions bodyItem = itemsList.get(position);
         SessionsBodyViewHolder holder = (SessionsBodyViewHolder) viewholder;
 
         holder.sessionNameTV.setText(bodyItem.getSessionName());
@@ -54,16 +54,12 @@ public class SessionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextDrawable textDrawable = TextDrawable.builder().buildRound(letterDrawable, generator.getRandomColor());
         ((SessionsBodyViewHolder) viewholder).session_bodyIV.setImageDrawable(textDrawable);
 
-//            Picasso.with(context)
-//                    .load(bodyItem.getSessionIcon())
-//                    .placeholder(R.drawable.basketball)
-//                    .into(holder.session_bodyIV);
-
         holder.rowLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, SessionsActivity.class);
                 intent.putExtra("prg_sess_id", bodyItem.getProgramSessionId());
+                intent.putExtra("prg_id", bodyItem.getProgramId());
                 intent.putExtra("session_name", bodyItem.getSessionName());
                 intent.putExtra("session_desc", bodyItem.getSessionDesc());
                 intent.putExtra("session_cover_image", bodyItem.getSessionCoverImage());
