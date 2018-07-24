@@ -219,7 +219,8 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view, int position) {
                 switch (position){
                     case 1:
-                        Toast.makeText(HomeActivity.this, "My Profile Clicked", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(HomeActivity.this, CoachProfileActivity.class));
+                        finish();
                         break;
 
                     case 2:

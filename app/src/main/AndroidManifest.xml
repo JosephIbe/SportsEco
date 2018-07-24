@@ -18,7 +18,7 @@
             android:value="sports_eco.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="11011" />
+            android:value="11111" />
 
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -37,7 +37,9 @@
         <activity android:name=".activities.StartSessionActivity" />
         <activity android:name=".activities.SelectBatchActivity" />
         <activity android:name=".activities.ProgramsActivity" />
-        <activity android:name=".activities.AllPlayersActivity"></activity>
+        <activity android:name=".activities.AllPlayersActivity" />
+        <activity android:name=".activities.CoachProfileActivity" />
+        <activity android:name=".activities.PlayerDetailsActivity"></activity>
     </application>
 
 </manifest>

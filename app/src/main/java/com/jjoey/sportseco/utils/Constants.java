@@ -31,4 +31,8 @@ public class Constants {
 
     public static final String COACH_PLAYER_FEEDBACK = BASE_URL + "/coach_player_feedback";
 
+    public static final String PROFILE_COACH = BASE_URL + "/get_coach_profile";
+
+    public static final String GET_PLAYER_PROFILE = BASE_URL + "/get_player_profile";
+
 }

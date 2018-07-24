@@ -54,7 +54,6 @@ public class FeedbackActivity extends AppCompatActivity {
 
     private void setUpTabs() {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.setupWithViewPager(viewPager);
         setUpViewPager(viewPager);
     }

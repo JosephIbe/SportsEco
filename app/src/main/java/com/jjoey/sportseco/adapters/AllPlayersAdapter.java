@@ -1,13 +1,14 @@
 package com.jjoey.sportseco.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.jjoey.sportseco.R;
+import com.jjoey.sportseco.activities.PlayerDetailsActivity;
 import com.jjoey.sportseco.models.AllPlayers;
 import com.jjoey.sportseco.viewholders.AllPlayersViewHolder;
 import com.squareup.picasso.Picasso;
@@ -52,10 +53,10 @@ public class AllPlayersAdapter extends RecyclerView.Adapter<AllPlayersViewHolder
         viewholder.playersLayoutHolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "To do:\t start new screen for userId:\t" + playeruserId);
-//                Intent intent = new Intent(context, PlayerDetailsActivity.class);
-//                intent.putExtra("player_user_id", playeruserId);
-//                context.startActivity(intent);
+                Intent intent = new Intent(context, PlayerDetailsActivity.class);
+                intent.putExtra("player_user_id", playeruserId);
+                context.startActivity(intent);
+//                ((AppCompatActivity)context).finish();
             }
         });
     }

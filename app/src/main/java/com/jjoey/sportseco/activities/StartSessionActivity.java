@@ -31,12 +31,12 @@ public class StartSessionActivity extends AppCompatActivity implements View.OnCl
     private RelativeLayout resetLayout;
 
     private TextView session_nameTV, timerTxt, endTimerTxt;
-    private CountDownTimer downTimer;
+    private CountDownTimer downTimer, resumeTimer;
 
     private long START_TIME;
     private long TIME_LEFT = START_TIME;
-    private long totalTimeCountInMilliseconds;
-    private boolean hasStarted = false;
+    private long totalTimeCountInMilliseconds, resumeCount;
+    private boolean hasStarted = false, isPaused = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class StartSessionActivity extends AppCompatActivity implements View.OnCl
         Log.d(TAG, "Session Prog id:\t" + progSessId);
         name_session = getIntent().getExtras().getString("session_name");
 
-        if (name_session != null){
+        if (name_session != null) {
             Log.d(TAG, "Session Name:\t" + name_session);
 //            session_nameTV.setText(name_session);
         }
@@ -101,7 +101,7 @@ public class StartSessionActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.playFAB:
                 setTimer();
 
@@ -123,9 +123,15 @@ public class StartSessionActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    private void restartTimer() {
+        isPaused = false;
+        hasStarted = true;
+    }
+
     private void pauseTimer() {
         downTimer.cancel();
         hasStarted = false;
+        isPaused = true;
         playFAB.setVisibility(View.VISIBLE);
         pauseFAB.setVisibility(View.GONE);
         resetLayout.setVisibility(View.GONE);

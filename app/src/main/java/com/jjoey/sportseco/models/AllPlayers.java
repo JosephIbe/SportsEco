@@ -25,16 +25,52 @@ public class AllPlayers extends Model {
     @Column(name = "address_player")
     public String address;
 
+    @Column(name = "dob_player")
+    public String dobPlayer;
+
+    @Column(name = "gender_player")
+    public String genderPlayer;
+
+    @Column(name = "pincode_player")
+    public String pinCodePlayer;
+
+    @Column(name = "height_player")
+    public String heightPlayer;
+
+    @Column(name = "weight_player")
+    public String weightPlayer;
+
+    @Column(name = "basketball_exp_player")
+    public String bsktballExpPlayer;
+
+    @Column(name = "position_player")
+    public String positionPlayer;
+
+    @Column(name = "state_player")
+    public String statePlayer;
+
+    @Column(name = "mobile_player")
+    public String mobilePlayer;
+
     public AllPlayers() {
     }
 
-    public AllPlayers(String userId, String firstName, String lastName, String imageURL, String username, String address) {
+    public AllPlayers(String userId, String firstName, String lastName, String imageURL, String username, String address, String dobPlayer, String genderPlayer, String pinCodePlayer, String heightPlayer, String weightPlayer, String bsktballExpPlayer, String positionPlayer, String statePlayer, String mobilePlayer) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.imageURL = imageURL;
         this.username = username;
         this.address = address;
+        this.dobPlayer = dobPlayer;
+        this.genderPlayer = genderPlayer;
+        this.pinCodePlayer = pinCodePlayer;
+        this.heightPlayer = heightPlayer;
+        this.weightPlayer = weightPlayer;
+        this.bsktballExpPlayer = bsktballExpPlayer;
+        this.positionPlayer = positionPlayer;
+        this.statePlayer = statePlayer;
+        this.mobilePlayer = mobilePlayer;
     }
 
     public String getUserId() {
@@ -83,5 +119,77 @@ public class AllPlayers extends Model {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getDobPlayer() {
+        return dobPlayer;
+    }
+
+    public void setDobPlayer(String dobPlayer) {
+        this.dobPlayer = dobPlayer;
+    }
+
+    public String getGenderPlayer() {
+        return genderPlayer;
+    }
+
+    public void setGenderPlayer(String genderPlayer) {
+        this.genderPlayer = genderPlayer;
+    }
+
+    public String getPinCodePlayer() {
+        return pinCodePlayer;
+    }
+
+    public void setPinCodePlayer(String pinCodePlayer) {
+        this.pinCodePlayer = pinCodePlayer;
+    }
+
+    public String getHeightPlayer() {
+        return heightPlayer;
+    }
+
+    public void setHeightPlayer(String heightPlayer) {
+        this.heightPlayer = heightPlayer;
+    }
+
+    public String getWeightPlayer() {
+        return weightPlayer;
+    }
+
+    public void setWeightPlayer(String weightPlayer) {
+        this.weightPlayer = weightPlayer;
+    }
+
+    public String getBsktballExpPlayer() {
+        return bsktballExpPlayer;
+    }
+
+    public void setBsktballExpPlayer(String bsktballExpPlayer) {
+        this.bsktballExpPlayer = bsktballExpPlayer;
+    }
+
+    public String getPositionPlayer() {
+        return positionPlayer;
+    }
+
+    public void setPositionPlayer(String positionPlayer) {
+        this.positionPlayer = positionPlayer;
+    }
+
+    public String getStatePlayer() {
+        return statePlayer;
+    }
+
+    public void setStatePlayer(String statePlayer) {
+        this.statePlayer = statePlayer;
+    }
+
+    public String getMobilePlayer() {
+        return mobilePlayer;
+    }
+
+    public void setMobilePlayer(String mobilePlayer) {
+        this.mobilePlayer = mobilePlayer;
     }
 }
