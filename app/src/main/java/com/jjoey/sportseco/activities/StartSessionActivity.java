@@ -123,11 +123,6 @@ public class StartSessionActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void restartTimer() {
-        isPaused = false;
-        hasStarted = true;
-    }
-
     private void pauseTimer() {
         downTimer.cancel();
         hasStarted = false;

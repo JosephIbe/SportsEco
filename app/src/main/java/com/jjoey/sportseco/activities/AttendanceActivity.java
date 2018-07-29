@@ -31,7 +31,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AttendanceActivity extends AppCompatActivity {
 
@@ -67,12 +69,20 @@ public class AttendanceActivity extends AppCompatActivity {
         checkAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AttendanceActivity.this, HomeActivity.class));
+                submitAttendanceBkg();
+//                startActivity(new Intent(AttendanceActivity.this, ViewSessionActivity.class));
             }
         });
 
         setUpAttendanceList();
 
+    }
+
+    private void submitAttendanceBkg() {
+        HashMap<String, String> map = adapter.sendToActivity();
+        for (Map.Entry<String, String> viewer : map.entrySet()) {
+            Log.d(TAG, "Players in map:\t" + viewer.getKey() + " \t and status in map:\t" + viewer.getValue());
+        }
     }
 
     private void setUpAttendanceList() {

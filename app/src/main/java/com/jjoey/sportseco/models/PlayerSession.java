@@ -46,7 +46,7 @@ public class PlayerSession extends Model {
     @Column(name = "program_user_map_id_player")
     public String programUserMapId_player;
 
-    @Column(name = "attendace_status")
+    @Column(name = "attendance_status")
     public String attendanceStatus_player;
 
     @Column(name = "session_id_player")

@@ -31,7 +31,7 @@
             android:name=".activities.LoginActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <activity android:name=".activities.HomeActivity" />
-        <activity android:name=".activities.SessionsActivity" />
+        <activity android:name=".activities.ViewSessionActivity" />
         <activity android:name=".activities.AttendanceActivity" />
         <activity android:name=".activities.FeedbackActivity" />
         <activity android:name=".activities.StartSessionActivity" />
@@ -39,7 +39,9 @@
         <activity android:name=".activities.ProgramsActivity" />
         <activity android:name=".activities.AllPlayersActivity" />
         <activity android:name=".activities.CoachProfileActivity" />
-        <activity android:name=".activities.PlayerDetailsActivity"></activity>
+        <activity android:name=".activities.PlayerDetailsActivity" />
+        <activity android:name=".activities.CalendarViewActivity" />
+        <activity android:name=".activities.DayViewActivity"></activity>
     </application>
 
 </manifest>

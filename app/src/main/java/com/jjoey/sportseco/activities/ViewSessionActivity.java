@@ -6,9 +6,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,9 +15,9 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.jjoey.sportseco.R;
 import com.squareup.picasso.Picasso;
 
-public class SessionsActivity extends AppCompatActivity {
+public class ViewSessionActivity extends AppCompatActivity {
 
-    private static final String TAG = SessionsActivity.class.getSimpleName();
+    private static final String TAG = ViewSessionActivity.class.getSimpleName();
 
     private AppBarLayout appBarLayout;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -57,7 +54,7 @@ public class SessionsActivity extends AppCompatActivity {
         attendanceFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(SessionsActivity.this, AttendanceActivity.class);
+                intent = new Intent(ViewSessionActivity.this, AttendanceActivity.class);
                 intent.putExtra("prg_sess_id", progSessId);
                 intent.putExtra("prg_id", prg_id);
                 startActivity(intent);
@@ -67,7 +64,7 @@ public class SessionsActivity extends AppCompatActivity {
         sessionFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(SessionsActivity.this, StartSessionActivity.class);
+                intent = new Intent(ViewSessionActivity.this, StartSessionActivity.class);
                 intent.putExtra("prg_sess_id", progSessId);
                 intent.putExtra("prg_id", prg_id);
                 intent.putExtra("session_name", name_session);
@@ -144,7 +141,7 @@ public class SessionsActivity extends AppCompatActivity {
     }
 
     private void startHomeActivity() {
-        startActivity(new Intent(SessionsActivity.this, HomeActivity.class));
+        startActivity(new Intent(ViewSessionActivity.this, HomeActivity.class));
         finish();
     }
 

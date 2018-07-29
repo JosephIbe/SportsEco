@@ -69,7 +69,9 @@ public class HomeActivity extends AppCompatActivity {
 
         setUpDrawer();
 
-        setBatchSpinner();
+        queryInfo();
+
+//        setBatchSpinner();
 
         BatchFragment batchFragment = new BatchFragment();
         Bundle bundle = new Bundle();
@@ -81,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private void setBatchSpinner() {
+    private void queryInfo() {
         Coach coach = new Select()
                 .from(Coach.class)
                 .orderBy("id ASC")
@@ -93,7 +95,9 @@ public class HomeActivity extends AppCompatActivity {
                 .orderBy("id ASC")
                 .executeSingle();
         id_batch = batch.batchId;
-        Log.d(TAG,"Coach id Home:\t" + coachId);
+    }
+
+    private void setBatchSpinner() {
         if (coachId != null){
             fetchBatches(coachId);
         }
@@ -224,15 +228,18 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
                     case 2:
-                        Toast.makeText(HomeActivity.this, "Calendar Soon", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(HomeActivity.this, CalendarViewActivity.class));
+                        finish();
                         break;
 
                     case 3:
                         startActivity(new Intent(HomeActivity.this, AllPlayersActivity.class));
+                        finish();
                         break;
 
                     case 4:
-                        Toast.makeText(HomeActivity.this, "Programs Clicked", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(HomeActivity.this, ProgramsActivity.class));
+                        finish();
                         break;
 
                     case 5:
@@ -247,6 +254,7 @@ public class HomeActivity extends AppCompatActivity {
                         intent.putExtra("coach_id", coachId);
                         intent.putExtra("batch_id", id_batch);
                         startActivity(intent);
+                        finish();
                         break;
 
                     case 8:

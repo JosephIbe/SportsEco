@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private List<Object> list = new ArrayList<>();
     private List<ProgramDetails> detailsList = new ArrayList<>();
     private Coach coach;
+    private android.support.v4.app.FragmentTransaction ft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,10 +194,11 @@ public class LoginActivity extends AppCompatActivity {
                                     list.add(batch);
                                     Log.d(TAG, "Batch Size:\t" + list.size());
                                     if (list.size() > 1){
-                                        Intent intent = new Intent(LoginActivity.this, SelectBatchActivity.class);
-                                        intent.putExtra("id_coach", coachId);
-                                        startActivity(intent);
-                                        finish();
+//                                        Intent intent = new Intent(LoginActivity.this, SelectBatchActivity.class);
+//                                        intent.putExtra("id_coach", coachId);
+//                                        startActivity(intent);
+//                                        finish();
+                                        fetchProgramList(id_batch, coachId);
                                     } else {
                                         fetchProgramList(id_batch, coachId);
                                     }

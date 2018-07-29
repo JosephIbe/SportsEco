@@ -4,16 +4,14 @@ package com.jjoey.sportseco.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.jjoey.sportseco.R;
-import com.jjoey.sportseco.activities.SessionsActivity;
+import com.jjoey.sportseco.activities.ViewSessionActivity;
 import com.jjoey.sportseco.models.Sessions;
 import com.jjoey.sportseco.viewholders.SessionsBodyViewHolder;
 import com.squareup.picasso.Picasso;
@@ -50,14 +48,19 @@ public class SessionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         String drawable = String.valueOf(String.valueOf(itemsList.get(position)).charAt(0));
         String drawable1 = String.valueOf(String.valueOf(itemsList.get(position)).charAt(1));
 
-        String letterDrawable = drawable.concat(drawable1);
-        TextDrawable textDrawable = TextDrawable.builder().buildRound(letterDrawable, generator.getRandomColor());
-        ((SessionsBodyViewHolder) viewholder).session_bodyIV.setImageDrawable(textDrawable);
+//        String letterDrawable = drawable.concat(drawable1);
+//        TextDrawable textDrawable = TextDrawable.builder().buildRound(letterDrawable, generator.getRandomColor());
+//        ((SessionsBodyViewHolder) viewholder).session_bodyIV.setImageDrawable(textDrawable);
+
+        Picasso.with(context)
+                .load(bodyItem.getSessionCoverImage())
+                .placeholder(R.drawable.basketball)
+                .into(((SessionsBodyViewHolder) viewholder).session_bodyIV);
 
         holder.rowLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, SessionsActivity.class);
+                Intent intent = new Intent(context, ViewSessionActivity.class);
                 intent.putExtra("prg_sess_id", bodyItem.getProgramSessionId());
                 intent.putExtra("prg_id", bodyItem.getProgramId());
                 intent.putExtra("session_name", bodyItem.getSessionName());

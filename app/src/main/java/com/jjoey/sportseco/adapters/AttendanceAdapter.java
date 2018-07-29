@@ -3,26 +3,33 @@ package com.jjoey.sportseco.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import com.jjoey.sportseco.R;
 import com.jjoey.sportseco.models.PlayerSession;
 import com.jjoey.sportseco.viewholders.AttendanceViewHolder;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceViewHolder> {
 
+    private static final String TAG = AttendanceAdapter.class.getSimpleName();
+
     private final Context context;
-//    private List<Attendance> itemsList;
     private List<PlayerSession> itemsList;
+    private HashMap<String, String> attendanceMap;
 
     public AttendanceAdapter(Context context, List<PlayerSession> itemsList) {
         this.context = context;
         this.itemsList = itemsList;
+        attendanceMap = new HashMap<>();
     }
 
     @Override
@@ -32,7 +39,7 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceViewHolder
     }
 
     @Override
-    public void onBindViewHolder(AttendanceViewHolder viewholder, int position) {
+    public void onBindViewHolder(AttendanceViewHolder viewholder, final int position) {
         PlayerSession playerSession = itemsList.get(position);
 
         String fName = playerSession.getFirstName_player();
@@ -46,9 +53,24 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceViewHolder
                 .placeholder(R.drawable.person_avatar)
                 .into(viewholder.circleImageView);
 
-//        Attendance attendance = itemsList.get(position);
-//        viewholder.playerNameTV.setText(attendance.getPlayerSession().getFirstName_player());
-//        viewholder.attendanceCheckBox.setChecked(attendance.getPlayerSession().isPresent());
+        viewholder.attendanceCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    attendanceMap.put(itemsList.get(position).getUserId_player(), "1");
+                    sendToActivity();
+                }
+            }
+        });
+
+        for (Map.Entry<String, String> viewer : attendanceMap.entrySet()) {
+            Log.d(TAG, "Players in map:\t" + viewer.getKey() + " \t and status in map:\t" + viewer.getValue());
+        }
+
+    }
+
+    public HashMap<String, String> sendToActivity() {
+        return attendanceMap;
     }
 
     @Override

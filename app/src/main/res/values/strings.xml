@@ -1,6 +1,39 @@
 <resources>
     <string name="app_name">SportsEco</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Calendar Strings -->
+    <string name="sunday_name_view">SUN</string>
+    <string name="monday_name_view">MON</string>
+    <string name="tuesday_name_view">TUE</string>
+    <string name="wednesday_name_view">WED</string>
+    <string name="thursday_name_view">THU</string>
+    <string name="friday_name_view">FRI</string>
+    <string name="saturday_name_view">SAT</string>
+
+    <string name="am12">12 am</string>
+    <string name="am11">11 am</string>
+    <string name="am10">10 am</string>
+    <string name="am9">09 am</string>
+    <string name="am8">08 am</string>
+    <string name="am7">07 am</string>
+    <string name="am6">06 am</string>
+    <string name="am5">05 am</string>
+    <string name="am4">04 am</string>
+    <string name="am3">03 am</string>
+    <string name="am2">02 am</string>
+    <string name="am1">01 am</string>
+
+    <string name="pm12">12 pm</string>
+    <string name="pm11">11 pm</string>
+    <string name="pm10">10 pm</string>
+    <string name="pm9">09 pm</string>
+    <string name="pm8">08 pm</string>
+    <string name="pm7">07 pm</string>
+    <string name="pm6">06 pm</string>
+    <string name="pm5">05 pm</string>
+    <string name="pm4">04 pm</string>
+    <string name="pm3">03 pm</string>
+    <string name="pm2">02 pm</string>
+    <string name="pm1">01 pm</string>
+
 </resources>

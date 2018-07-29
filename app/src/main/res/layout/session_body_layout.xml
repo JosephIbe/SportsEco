@@ -6,8 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="151dp"
+        android:layout_height="210dp"
         app:cardCornerRadius="5dp"
         android:layout_margin="3dp">
 
@@ -15,26 +15,30 @@
             android:id="@+id/rowLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="15dp"
+            android:padding="30dp"
             android:orientation="vertical"
             android:gravity="center_horizontal">
 
             <ImageView
                 android:id="@+id/session_bodyIV"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
                 tools:src="@drawable/basketball"/>
 
             <TextView
                 android:id="@+id/sessionNameTV"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Create Session"
+                tools:text="Fitness Training"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:textAlignment="center"
                 android:textStyle="bold"
-                android:maxLength="7"
-                android:maxLines="2"/>
+                android:maxLength="16"
+                android:maxLines="2"
+                android:layout_marginTop="15dp"/>
 
         </LinearLayout>
 

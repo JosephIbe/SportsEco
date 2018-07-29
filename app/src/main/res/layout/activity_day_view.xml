@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="0dp"
+    tools:context=".activities.DayViewActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/days_header_bkg">
+
+        <ImageView
+            android:id="@+id/backIV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@drawable/back"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:id="@+id/dayTitleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/backIV"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="30th July, 2018" />
+
+    </RelativeLayout>
+
+    <!--> Separator between day and tasks <!-->
+    <View
+        android:id="@+id/firstView"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/line" />
+
+    <!--> Tasks header <!-->
+    <LinearLayout
+        android:id="@+id/tasksLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <!--> Separator between tasks and meetings <!-->
+    <View
+        android:id="@+id/secondView"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/line" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
+        android:padding="0dp"
+        android:scrollbars="none">
+
+        <!--> Events <!-->
+        <RelativeLayout
+            android:id="@+id/calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp">
+
+            <!--> Linear Layout Events <!-->
+            <LinearLayout
+                android:id="@+id/calendarLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:padding="0dp">
+
+                <!--> Hours <!-->
+                <RelativeLayout
+                    android:id="@+id/hours"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+
+                    android:background="@color/headers"
+                    android:padding="0dp">
+
+                    <include layout="@layout/calendar_events" />
+
+                    <!--> 12AM <!-->
+                    <TextView
+                        android:id="@+id/time12am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:text="@string/am12"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 01AM <!-->
+                    <TextView
+                        android:id="@+id/time01am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="60dp"
+                        android:gravity="center"
+                        android:text="@string/am1"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 02AM <!-->
+                    <TextView
+                        android:id="@+id/time02am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="120dp"
+                        android:gravity="center"
+                        android:text="@string/am2"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 03AM <!-->
+                    <TextView
+                        android:id="@+id/time03am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="180dp"
+                        android:gravity="center"
+                        android:text="@string/am3"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 04AM <!-->
+                    <TextView
+                        android:id="@+id/time04am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="240dp"
+                        android:gravity="center"
+                        android:text="@string/am4"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 05AM <!-->
+                    <TextView
+                        android:id="@+id/time5am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="300dp"
+                        android:gravity="center"
+                        android:text="@string/am5"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 06AM <!-->
+                    <TextView
+                        android:id="@+id/time6am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="360dp"
+                        android:gravity="center"
+                        android:text="@string/am6"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 07AM <!-->
+                    <TextView
+                        android:id="@+id/time7am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="420dp"
+                        android:gravity="center"
+                        android:text="@string/am7"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 08AM <!-->
+                    <TextView
+                        android:id="@+id/time8am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="480dp"
+                        android:gravity="center"
+                        android:text="@string/am8"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 09AM <!-->
+                    <TextView
+                        android:id="@+id/time9am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="540dp"
+                        android:gravity="center"
+                        android:text="@string/am9"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 10AM <!-->
+                    <TextView
+                        android:id="@+id/time10am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="600dp"
+                        android:gravity="center"
+                        android:text="@string/am10"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 11AM <!-->
+                    <TextView
+                        android:id="@+id/time11am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="660dp"
+                        android:gravity="center"
+                        android:text="@string/am11"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 12PM <!-->
+                    <TextView
+                        android:id="@+id/time12pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="720dp"
+                        android:gravity="center"
+                        android:text="@string/pm12"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 01PM <!-->
+                    <TextView
+                        android:id="@+id/time01pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="780dp"
+                        android:gravity="center"
+                        android:text="@string/pm1"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 02PM <!-->
+                    <TextView
+                        android:id="@+id/time02pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="840dp"
+                        android:gravity="center"
+                        android:text="@string/pm2"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 03PM <!-->
+                    <TextView
+                        android:id="@+id/time03pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="900dp"
+                        android:gravity="center"
+                        android:text="@string/pm3"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 04PM <!-->
+                    <TextView
+                        android:id="@+id/time04pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="960dp"
+                        android:gravity="center"
+                        android:text="@string/pm4"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 05PM <!-->
+                    <TextView
+                        android:id="@+id/time05pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1020dp"
+                        android:gravity="center"
+                        android:text="@string/pm5"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 06PM <!-->
+                    <TextView
+                        android:id="@+id/time06pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1080dp"
+                        android:gravity="center"
+                        android:text="@string/pm6"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 07PM <!-->
+                    <TextView
+                        android:id="@+id/time07pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1140dp"
+                        android:gravity="center"
+                        android:text="@string/am7"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 08PM <!-->
+                    <TextView
+                        android:id="@+id/time08pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1200dp"
+                        android:gravity="center"
+                        android:text="@string/pm8"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 09PM <!-->
+                    <TextView
+                        android:id="@+id/time09pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1260dp"
+                        android:gravity="center"
+                        android:text="@string/pm9"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 10PM <!-->
+                    <TextView
+                        android:id="@+id/time10pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1320dp"
+                        android:gravity="center"
+                        android:text="@string/pm10"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                    <!--> 11PM <!-->
+                    <TextView
+                        android:id="@+id/time11pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1380dp"
+                        android:gravity="center"
+                        android:text="@string/pm11"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
+
+                <!--> Separator between Hours and Events <!-->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/line" />
+
+                <!--> Events <!-->
+                <RelativeLayout
+                    android:id="@+id/meetings"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/background_degradable">
+
+                    <include layout="@layout/calendar_events_details" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

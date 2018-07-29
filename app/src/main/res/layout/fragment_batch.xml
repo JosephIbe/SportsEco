@@ -14,56 +14,55 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:orientation="vertical"
-            android:layout_margin="10dp">
+            android:weightSum="2">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sessions"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:padding="5dp"/>
-
-            <android.support.v7.widget.RecyclerView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="80dp"
-                android:id="@+id/sessionsRV"/>
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Video of The Day"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:padding="5dp"
-                android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Video of The Day"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <VideoView
-                android:id="@+id/videoView"
+                <VideoView
+                    android:id="@+id/videoView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/moreTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="More..."
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-condensed"
-                android:padding="10dp"
-                android:layout_gravity="start"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Sessions"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="80dp"
-                android:id="@+id/moreRV"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/sessionsRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:minHeight="80dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

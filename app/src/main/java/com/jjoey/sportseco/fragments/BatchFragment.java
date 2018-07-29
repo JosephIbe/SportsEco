@@ -38,8 +38,7 @@ public class BatchFragment extends Fragment {
 
     private static final String TAG = BatchFragment.class.getSimpleName();
 
-    private RecyclerView sessionsRV, moreRV;
-    private TextView moreTV;
+    private RecyclerView sessionsRV;
     private VideoView videoView;
 
     private String coachId = null, batchId = null;
@@ -75,41 +74,12 @@ public class BatchFragment extends Fragment {
 
         initVideoOfDay();
 
-        setUpMisc();
-
         return view;
     }
 
     private void initViews(View view) {
-        moreTV = view.findViewById(R.id.moreTV);
         sessionsRV = view.findViewById(R.id.sessionsRV);
-        moreRV = view.findViewById(R.id.moreRV);
         videoView = view.findViewById(R.id.videoView);
-    }
-
-    private void setUpMisc() {
-        moreRV.setHasFixedSize(true);
-        LinearLayoutManager horLm = new LinearLayoutManager(getActivity());
-        horLm.setOrientation(LinearLayoutManager.HORIZONTAL);
-        moreRV.setLayoutManager(horLm);
-
-        List<String> list = new ArrayList<>();
-        String misc = "Focal Points";
-        list.add(misc);
-
-        String misc2 = "Evaluations";
-        list.add(misc2);
-
-        HomeMiscAdapter miscAdapter = new HomeMiscAdapter(getActivity(), list);
-        moreRV.setAdapter(miscAdapter);
-
-        moreTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "More Clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
-
     }
 
     private void setUpSessionsRV() {
