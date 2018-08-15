@@ -1,7 +1,12 @@
 package com.jjoey.sportseco.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -59,6 +64,9 @@ public class HomeActivity extends AppCompatActivity {
     private String coachId = null, name_batch, id_batch;
     private ArrayAdapter<Object> arrayAdapter;
 
+    private BatchFragment batchFragment;
+    private static final int PERMS_CODE = 1002;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,14 +81,43 @@ public class HomeActivity extends AppCompatActivity {
 
 //        setBatchSpinner();
 
-        BatchFragment batchFragment = new BatchFragment();
+        batchFragment = new BatchFragment();
         Bundle bundle = new Bundle();
         bundle.putString("coach_id", coachId);
         bundle.putString("batch_id", id_batch);
         batchFragment.setArguments(bundle);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frameBatches, batchFragment).commit();
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+            askPerms();
+        } else {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frameBatches, batchFragment).commit();
+        }
+
+    }
+
+    private void askPerms() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR},
+                PERMS_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PERMS_CODE:
+                if (grantResults.length > 0) {
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED || grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.frameBatches, batchFragment).commit();
+                    } else {
+                        Snackbar.make(findViewById(android.R.id.content), "Grant Calendar Permissions to Proceed",
+                                Snackbar.LENGTH_LONG).show();
+                        askPerms();
+                    }
+                }
+                break;
+        }
     }
 
     private void queryInfo() {
@@ -98,8 +135,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setBatchSpinner() {
-        if (coachId != null){
-            fetchBatches(coachId);
+        if (coachId != null) {
+//            fetchBatches(coachId);
         }
     }
 
@@ -193,6 +230,9 @@ public class HomeActivity extends AppCompatActivity {
         ItemsDrawer drawer8 = new ItemsDrawer(R.drawable.basketball, "About Us");
         itemsDrawerList.add(drawer8);
 
+//        ItemsDrawer drawer9 = new ItemsDrawer(R.drawable.settings, "Settings");
+//        itemsDrawerList.add(drawer9);
+
         drawerAdapter = new ItemsDrawerAdapter(this, itemsDrawerList);
         drawerRV.setAdapter(drawerAdapter);
 
@@ -221,24 +261,31 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view, int position) {
-                switch (position){
+                switch (position) {
                     case 1:
                         startActivity(new Intent(HomeActivity.this, CoachProfileActivity.class));
+                        overridePendingTransition(R.anim.anim_slide_right, R.anim.anim_slide_left);
                         finish();
                         break;
 
                     case 2:
-                        startActivity(new Intent(HomeActivity.this, CalendarViewActivity.class));
+                        intent = new Intent(HomeActivity.this, CalendarViewActivity.class);
+                        intent.putExtra("coach_id", coachId);
+                        intent.putExtra("batch_id", id_batch);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.anim_slide_right, R.anim.anim_slide_left);
                         finish();
                         break;
 
                     case 3:
                         startActivity(new Intent(HomeActivity.this, AllPlayersActivity.class));
+                        overridePendingTransition(R.anim.anim_slide_right, R.anim.anim_slide_left);
                         finish();
                         break;
 
                     case 4:
                         startActivity(new Intent(HomeActivity.this, ProgramsActivity.class));
+                        overridePendingTransition(R.anim.anim_slide_right, R.anim.anim_slide_left);
                         finish();
                         break;
 
@@ -254,6 +301,7 @@ public class HomeActivity extends AppCompatActivity {
                         intent.putExtra("coach_id", coachId);
                         intent.putExtra("batch_id", id_batch);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.anim_slide_right, R.anim.anim_slide_left);
                         finish();
                         break;
 
@@ -264,6 +312,12 @@ public class HomeActivity extends AppCompatActivity {
                     case 9:
                         Toast.makeText(HomeActivity.this, "About Clicked", Toast.LENGTH_SHORT).show();
                         break;
+//                    case 10:
+//                        startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+//                        overridePendingTransition(R.anim.anim_slide_right, R.anim.anim_slide_left);
+//                        finish();
+//                        Toast.makeText(HomeActivity.this, "Settings Clicked", Toast.LENGTH_SHORT).show();
+//                        break;
                 }
             }
         }));
@@ -280,7 +334,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (drawerLayout.isDrawerOpen(GravityCompat.END)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
             drawerLayout.closeDrawer(GravityCompat.END);
         }
     }
@@ -288,14 +342,14 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (drawerLayout.isDrawerOpen(GravityCompat.END)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
             drawerLayout.closeDrawer(GravityCompat.END);
         }
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.ACTION_DOWN){
+        if (keyCode == KeyEvent.ACTION_DOWN) {
             super.onKeyDown(keyCode, event);
             return true;
         }

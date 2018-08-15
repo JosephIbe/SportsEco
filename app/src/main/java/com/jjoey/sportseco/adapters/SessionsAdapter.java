@@ -4,11 +4,11 @@ package com.jjoey.sportseco.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.jjoey.sportseco.R;
 import com.jjoey.sportseco.activities.ViewSessionActivity;
@@ -65,6 +65,9 @@ public class SessionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 intent.putExtra("prg_id", bodyItem.getProgramId());
                 intent.putExtra("session_name", bodyItem.getSessionName());
                 intent.putExtra("session_desc", bodyItem.getSessionDesc());
+                intent.putExtra("session_start_time", bodyItem.getHour_start());
+//                intent.putExtra("session_end_time", bodyItem.getEndTime());
+                Log.d(TAG, "Duration from intent:\t" + bodyItem.getSessDuration());
                 intent.putExtra("session_cover_image", bodyItem.getSessionCoverImage());
                 intent.putExtra("session_video_link", bodyItem.getSessionVideoLink());
                 intent.putExtra("session_focus_pts", bodyItem.getSessionFocusPoints());

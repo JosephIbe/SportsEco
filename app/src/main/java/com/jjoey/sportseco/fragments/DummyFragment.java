@@ -1,6 +1,5 @@
 package com.jjoey.sportseco.fragments;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,9 +16,6 @@ import com.jjoey.sportseco.models.AllPlayers;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class DummyFragment extends Fragment {
 
     private RecyclerView allPlayersRV;
@@ -50,6 +46,7 @@ public class DummyFragment extends Fragment {
 
         return view;
     }
+
 
     private List<AllPlayers> getList(){
         return new Select()

@@ -35,4 +35,10 @@ public class Constants {
 
     public static final String GET_PLAYER_PROFILE = BASE_URL + "/get_player_profile";
 
+    public static final String MARK_SESSION_COMPLETE = BASE_URL + "/session_complete";
+
+    public static final String PLAYER_ATTENDANCE_STATS = BASE_URL + "/attendance_statistics'";
+
+    public static final String GET_COMPLETED_SESSIONS = BASE_URL + "/completed_sessions'";
+
 }

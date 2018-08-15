@@ -1,6 +1,5 @@
 package com.jjoey.sportseco.adapters;
 
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,6 +24,7 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceViewHolder
     private final Context context;
     private List<PlayerSession> itemsList;
     private HashMap<String, String> attendanceMap;
+    public static int numChecked = 0;
 
     public AttendanceAdapter(Context context, List<PlayerSession> itemsList) {
         this.context = context;
@@ -40,7 +40,7 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceViewHolder
 
     @Override
     public void onBindViewHolder(AttendanceViewHolder viewholder, final int position) {
-        PlayerSession playerSession = itemsList.get(position);
+        final PlayerSession playerSession = itemsList.get(position);
 
         String fName = playerSession.getFirstName_player();
         String lName = playerSession.getLastName_player();
@@ -53,12 +53,20 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceViewHolder
                 .placeholder(R.drawable.person_avatar)
                 .into(viewholder.circleImageView);
 
+        viewholder.attendanceCheckBox.setOnCheckedChangeListener(null);
+        viewholder.attendanceCheckBox.setChecked(playerSession.isPresent());
+
         viewholder.attendanceCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
+                    numChecked++;
+                    Log.d(TAG, "Num Items Checked:\t" + numChecked);
+                    playerSession.setPresent(b);
                     attendanceMap.put(itemsList.get(position).getUserId_player(), "1");
                     sendToActivity();
+                } else {
+                    numChecked--;
                 }
             }
         });
@@ -73,6 +81,14 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceViewHolder
         return attendanceMap;
     }
 
+    public HashMap<String, String> sendToDialogFragment() {
+        return attendanceMap;
+    }
+
+    public int getNumChecked(){
+        return numChecked;
+    }
+
     @Override
     public int getItemCount() {
         if (itemsList == null) {
@@ -80,4 +96,5 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceViewHolder
         }
         return itemsList.size();
     }
+
 }

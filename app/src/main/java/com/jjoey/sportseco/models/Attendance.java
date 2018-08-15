@@ -40,4 +40,5 @@ public class Attendance {
     public void setPresent(boolean present) {
         isPresent = present;
     }
+
 }

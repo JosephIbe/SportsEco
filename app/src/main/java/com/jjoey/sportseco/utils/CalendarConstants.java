@@ -5,6 +5,7 @@ public class CalendarConstants {
     public static final String MY_ACCOUNT_NAME = "Joseph Joey";
     public static final String CALENDAR_NAME = "SportsEco Calendar";
 
+    public static final String EVENT_TO_SEND = "EventToSend";
     public static final String EVENT_TO_ADD = "EventToAdd";
     public static final String UNDONE_TASKS_TO_SHOW = "UndoneTasksToShow";
 

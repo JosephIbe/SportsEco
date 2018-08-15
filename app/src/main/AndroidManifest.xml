@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.jjoey.sportseco">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
 
     <application
         android:name=".extras.SportsEcoApp"
@@ -18,7 +21,7 @@
             android:value="sports_eco.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="11111" />
+            android:value="111110" />
 
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -32,7 +35,7 @@
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <activity android:name=".activities.HomeActivity" />
         <activity android:name=".activities.ViewSessionActivity" />
-        <activity android:name=".activities.AttendanceActivity" />
+        <activity android:name=".activities.MarkAttendanceActivity" />
         <activity android:name=".activities.FeedbackActivity" />
         <activity android:name=".activities.StartSessionActivity" />
         <activity android:name=".activities.SelectBatchActivity" />

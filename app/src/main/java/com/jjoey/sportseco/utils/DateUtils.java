@@ -247,17 +247,21 @@ public class DateUtils {
     }
 
     public static int getHour(String hour) throws ParseException {
-        String[] parts = hour.split(":");
-        if (parts.length != 2) throw new ParseException("Wrong format", 127);
-        int result = Integer.parseInt(parts[0]);
+//        String[] parts = hour.split(":");
+//        if (parts.length != 2) throw new ParseException("Wrong format", 127);
+//        int result = Integer.parseInt(parts[0]);
+        String parts = hour;
+        int result = Integer.parseInt(parts);
         if (result < 0 || result >= 24) throw new ParseException("Format incorrect", 129);
         return result;
     }
 
     public static int getMinute(String hour) throws ParseException{
-        String[] parts = hour.split(":");
-        if (parts.length != 2) throw new ParseException("Wrong format", 134);
-        int result = Integer.parseInt(parts[1]);
+//        String[] parts = hour.split(":");
+//        if (parts.length != 2) throw new ParseException("Wrong format", 134);
+//        int result = Integer.parseInt(parts[1]);
+        String parts = hour;
+        int result = Integer.parseInt(parts);
         if (result < 0 || result >= 60) throw new ParseException("Format incorrect", 136);
         return result;
     }
@@ -341,6 +345,7 @@ public class DateUtils {
         if (dateSeparated[0].equals("1")) result += "st ";
         else if (dateSeparated[0].equals("2")) result += "nd ";
         else if (dateSeparated[0].equals("3")) result += "rd ";
+        else if (dateSeparated[0].equals("21")  || dateSeparated[0].equals("31")) result += "st ";
         else result += "th ";
         if (dateSeparated[1].equals("1")) result += JANUARY + " ";
         else if (dateSeparated[1].equals("2")) result += FEBRUARY + " ";

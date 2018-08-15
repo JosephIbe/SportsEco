@@ -34,8 +34,26 @@ public class Sessions extends Model {
     @Column(name = "session_focus_points")
     public String sessionFocusPoints;
 
-    @Column(name = "session_date_time")
-    public String dateTime;
+    @Column(name = "date_start")
+    public String date_start;
+
+    @Column(name = "date_end")
+    public String date_end;
+
+    @Column(name = "hour_start")
+    public String hour_start;
+
+    @Column(name = "hour_end")
+    public String hour_end;
+
+    @Column(name = "minute_start")
+    public String minute_start;
+
+    @Column(name = "minute_end")
+    public String minute_end;
+
+    @Column(name = "session_duration")
+    public String sessDuration;
 
     @Column(name = "coach_id")
     public String coachId;
@@ -43,7 +61,7 @@ public class Sessions extends Model {
     public Sessions() {
     }
 
-    public Sessions(int sessionIcon, String sessionName, String programSessionId, String programId, String programName, String sessionDesc, String sessionVideoLink, String sessionCoverImage, String sessionFocusPoints, String dateTime, String coachId) {
+    public Sessions(int sessionIcon, String sessionName, String programSessionId, String programId, String programName, String sessionDesc, String sessionVideoLink, String sessionCoverImage, String sessionFocusPoints, String date_start, String date_end, String hour_start, String hour_end, String minute_start, String minute_end, String sessDuration, String coachId) {
         this.sessionIcon = sessionIcon;
         this.sessionName = sessionName;
         this.programSessionId = programSessionId;
@@ -53,7 +71,13 @@ public class Sessions extends Model {
         this.sessionVideoLink = sessionVideoLink;
         this.sessionCoverImage = sessionCoverImage;
         this.sessionFocusPoints = sessionFocusPoints;
-        this.dateTime = dateTime;
+        this.date_start = date_start;
+        this.date_end = date_end;
+        this.hour_start = hour_start;
+        this.hour_end = hour_end;
+        this.minute_start = minute_start;
+        this.minute_end = minute_end;
+        this.sessDuration = sessDuration;
         this.coachId = coachId;
     }
 
@@ -129,12 +153,60 @@ public class Sessions extends Model {
         this.sessionFocusPoints = sessionFocusPoints;
     }
 
-    public String getDateTime() {
-        return dateTime;
+    public String getDate_start() {
+        return date_start;
     }
 
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
+    public void setDate_start(String date_start) {
+        this.date_start = date_start;
+    }
+
+    public String getDate_end() {
+        return date_end;
+    }
+
+    public void setDate_end(String date_end) {
+        this.date_end = date_end;
+    }
+
+    public String getHour_start() {
+        return hour_start;
+    }
+
+    public void setHour_start(String hour_start) {
+        this.hour_start = hour_start;
+    }
+
+    public String getHour_end() {
+        return hour_end;
+    }
+
+    public void setHour_end(String hour_end) {
+        this.hour_end = hour_end;
+    }
+
+    public String getMinute_start() {
+        return minute_start;
+    }
+
+    public void setMinute_start(String minute_start) {
+        this.minute_start = minute_start;
+    }
+
+    public String getMinute_end() {
+        return minute_end;
+    }
+
+    public void setMinute_end(String minute_end) {
+        this.minute_end = minute_end;
+    }
+
+    public String getSessDuration() {
+        return sessDuration;
+    }
+
+    public void setSessDuration(String sessDuration) {
+        this.sessDuration = sessDuration;
     }
 
     public String getCoachId() {

@@ -1,11 +1,14 @@
 package com.jjoey.sportseco.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
 public class OnSwipeTouchListener implements View.OnTouchListener {
+
+    private static final String TAG = OnSwipeTouchListener.class.getSimpleName();
 
     private final GestureDetector gestureDetector;
 
@@ -15,6 +18,7 @@ public class OnSwipeTouchListener implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        Log.d(TAG, "Touch event:\t" + event.toString());
         return gestureDetector.onTouchEvent(event);
     }
 

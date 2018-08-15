@@ -18,14 +18,11 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.jjoey.sportseco.R;
 import com.jjoey.sportseco.adapters.CoachProfilePagerAdapter;
-import com.jjoey.sportseco.adapters.ViewPagerAdapter;
-import com.jjoey.sportseco.fragments.CreateFeedbackFragment;
 import com.jjoey.sportseco.fragments.DummyFragment;
-import com.jjoey.sportseco.fragments.FeedbackHistoryFragment;
+import com.jjoey.sportseco.fragments.SessionHistoryFrag;
 import com.jjoey.sportseco.models.Coach;
 import com.jjoey.sportseco.utils.Constants;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -92,7 +89,7 @@ public class CoachProfileActivity extends AppCompatActivity {
 
     private void setUpViewPager(ViewPager viewPager) {
         pagerAdapter = new CoachProfilePagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addTabs(new DummyFragment(), "DUMMY");
+        pagerAdapter.addTabs(new SessionHistoryFrag(), "SESSIONS HISTORY");
         pagerAdapter.addTabs(new DummyFragment(), "DUMMY");
         pagerAdapter.addTabs(new DummyFragment(), "DUMMY");
         viewPager.setAdapter(pagerAdapter);

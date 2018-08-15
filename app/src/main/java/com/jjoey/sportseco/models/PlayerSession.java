@@ -26,7 +26,7 @@ public class PlayerSession extends Model {
     public String address_player;
 
     @Column(name = "batch_name_player")
-    public String batcName_player;
+    public String batchName_player;
 
     @Column(name = "batch_id_player")
     public String batchId_player;
@@ -35,7 +35,7 @@ public class PlayerSession extends Model {
     public String programName_player;
 
     @Column(name = "program_id_player")
-    public String programIdPayer;
+    public String programIdPlayer;
 
     @Column(name = "program_start_date_player")
     public String startDate_player;
@@ -52,26 +52,28 @@ public class PlayerSession extends Model {
     @Column(name = "session_id_player")
     public String sessionId_player;
 
+    public boolean isPresent;
 
     public PlayerSession() {
     }
 
-    public PlayerSession(String userId_player, String firstName_player, String lastName_player, String imageURL, String username, String address_player, String batcName_player, String batchId_player, String programName_player, String programIdPayer, String startDate_player, String endDate_player, String programUserMapId_player, String attendanceStatus_player, String sessionId_player) {
+    public PlayerSession(String userId_player, String firstName_player, String lastName_player, String imageURL, String username, String address_player, String batchName_player, String batchId_player, String programName_player, String programIdPlayer, String startDate_player, String endDate_player, String programUserMapId_player, String attendanceStatus_player, String sessionId_player, boolean isPresent) {
         this.userId_player = userId_player;
         this.firstName_player = firstName_player;
         this.lastName_player = lastName_player;
         this.imageURL = imageURL;
         this.username = username;
         this.address_player = address_player;
-        this.batcName_player = batcName_player;
+        this.batchName_player = batchName_player;
         this.batchId_player = batchId_player;
         this.programName_player = programName_player;
-        this.programIdPayer = programIdPayer;
+        this.programIdPlayer = programIdPlayer;
         this.startDate_player = startDate_player;
         this.endDate_player = endDate_player;
         this.programUserMapId_player = programUserMapId_player;
         this.attendanceStatus_player = attendanceStatus_player;
         this.sessionId_player = sessionId_player;
+        this.isPresent = isPresent;
     }
 
     public String getUserId_player() {
@@ -122,12 +124,12 @@ public class PlayerSession extends Model {
         this.address_player = address_player;
     }
 
-    public String getBatcName_player() {
-        return batcName_player;
+    public String getBatchName_player() {
+        return batchName_player;
     }
 
-    public void setBatcName_player(String batcName_player) {
-        this.batcName_player = batcName_player;
+    public void setBatchName_player(String batchName_player) {
+        this.batchName_player = batchName_player;
     }
 
     public String getBatchId_player() {
@@ -146,12 +148,12 @@ public class PlayerSession extends Model {
         this.programName_player = programName_player;
     }
 
-    public String getProgramIdPayer() {
-        return programIdPayer;
+    public String getProgramIdPlayer() {
+        return programIdPlayer;
     }
 
-    public void setProgramIdPayer(String programIdPayer) {
-        this.programIdPayer = programIdPayer;
+    public void setProgramIdPlayer(String programIdPlayer) {
+        this.programIdPlayer = programIdPlayer;
     }
 
     public String getStartDate_player() {
@@ -194,4 +196,11 @@ public class PlayerSession extends Model {
         this.sessionId_player = sessionId_player;
     }
 
+    public boolean isPresent() {
+        return isPresent;
+    }
+
+    public void setPresent(boolean present) {
+        isPresent = present;
+    }
 }

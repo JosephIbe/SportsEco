@@ -18,6 +18,8 @@ public class AttendanceViewHolder extends RecyclerView.ViewHolder {
     public AttendanceViewHolder(View itemView) {
         super(itemView);
 
+        this.setIsRecyclable(false);
+
         circleImageView = itemView.findViewById(R.id.player_img);
         attendanceCheckBox = itemView.findViewById(R.id.attendanceCheckBox);
         playerNameTV = itemView.findViewById(R.id.playerNameTV);

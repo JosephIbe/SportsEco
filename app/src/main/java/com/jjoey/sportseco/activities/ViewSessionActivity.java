@@ -31,8 +31,8 @@ public class ViewSessionActivity extends AppCompatActivity {
 
     private Intent intent = null;
     private String name_session = null, progSessId = null, prg_id = null,
-            desc = null, cover_img = null,
-            focus_points = null, video_link = null;
+            desc = null, cover_img = null, focus_points = null,
+            video_link = null, start_time = null, end_time = null, duration = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +54,13 @@ public class ViewSessionActivity extends AppCompatActivity {
         attendanceFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(ViewSessionActivity.this, AttendanceActivity.class);
+                intent = new Intent(ViewSessionActivity.this, MarkAttendanceActivity.class);
                 intent.putExtra("prg_sess_id", progSessId);
                 intent.putExtra("prg_id", prg_id);
+                intent.putExtra("session_name", name_session);
+                intent.putExtra("start_time", start_time);
+                intent.putExtra("end_time", end_time);
+                intent.putExtra("duration", duration);
                 startActivity(intent);
             }
         });
@@ -68,6 +72,10 @@ public class ViewSessionActivity extends AppCompatActivity {
                 intent.putExtra("prg_sess_id", progSessId);
                 intent.putExtra("prg_id", prg_id);
                 intent.putExtra("session_name", name_session);
+                intent.putExtra("start_time", start_time);
+                intent.putExtra("end_time", end_time);
+                intent.putExtra("duration", duration);
+                intent.putExtra("has_marked_attendance", false);
                 startActivity(intent);
                 finish();
             }
@@ -83,6 +91,9 @@ public class ViewSessionActivity extends AppCompatActivity {
         cover_img = getIntent().getExtras().getString("session_cover_image");
         focus_points = getIntent().getExtras().getString("session_focus_pts");
         video_link = getIntent().getExtras().getString("session_video_link");
+        start_time = getIntent().getExtras().getString("session_start_time");
+        end_time = getIntent().getExtras().getString("session_end_time");
+        duration = getIntent().getExtras().getString("session_duration");
 
         sessionNameTxt.setText(name_session);
         sessionDescTxt.setText(desc);
@@ -121,17 +132,19 @@ public class ViewSessionActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (actionMenu.isOpened()){
+        if (actionMenu.isOpened()) {
             actionMenu.close(true);
-        } else {}
+        } else {
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (actionMenu.isOpened()){
+        if (actionMenu.isOpened()) {
             actionMenu.close(true);
-        } else {}
+        } else {
+        }
     }
 
     @Override
