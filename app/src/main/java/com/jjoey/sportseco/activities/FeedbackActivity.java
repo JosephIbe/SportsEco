@@ -49,6 +49,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
     private void startHomeActivity() {
         startActivity(new Intent(FeedbackActivity.this, HomeActivity.class));
+        overridePendingTransition(R.anim.anim_slide_left, R.anim.anim_slide_right);
         finish();
     }
 

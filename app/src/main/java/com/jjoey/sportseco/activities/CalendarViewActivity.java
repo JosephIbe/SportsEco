@@ -127,6 +127,7 @@ public class CalendarViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(CalendarViewActivity.this, HomeActivity.class));
+//                overridePendingTransition(R.anim.anim_slide_left, R.anim.anim_slide_right);
                 finish();
             }
         });
@@ -143,9 +144,6 @@ public class CalendarViewActivity extends AppCompatActivity {
     }
 
     private void fetchSessionEvents() {
-
-//        coachId = getIntent().getExtras().getString("coach_id");
-//        batch_id = getIntent().getExtras().getString("batch_id");
 
         Coach coach = new Select()
                 .from(Coach.class)
@@ -192,7 +190,6 @@ public class CalendarViewActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         if (response != null) {
-//                            Log.d(TAG, "Program Session List Response:\t" + response.toString());
                             try {
                                 JSONObject object = new JSONObject(response.toString());
                                 JSONArray array = object.getJSONArray("Session_details");
@@ -724,33 +721,6 @@ public class CalendarViewActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (resultCode) {
-            case RESULT_OK:
-                if (data == null) {
-                    Log.d(TAG, "Intent data is null ");
-                    return;
-                } else {
-                    Log.d(TAG, "Intent data is:\t" + data);
-
-//                    eventAdded = (Event) data.getSerializableExtra(CalendarConstants.EVENT_TO_SEND);
-//                    if (eventAdded.isMeeting()) {
-//                        SessionMeeting meeting = (SessionMeeting) eventAdded;
-//                        if (!existsMeetingWithSameSchedule(meeting)) {
-//                            addMeeting(meeting.getDescription(), meeting.getDay(), meeting.getMonth(), meeting.getYear(),
-//                                    meeting.getStartHour(), meeting.getStartMinute(), meeting.getEndHour(), meeting.getEndMinute());
-//                        } else {
-//                            Log.d(TAG, "A Meeting With Same Dates Already Exists");
-//                            return;
-//                        }
-//                    }
-
-                }
-                break;
-        }
-    }
-
     private long addMeeting(String description, int day, int month, int year, int startHour,
                             int startMinute, int endHour,
                             int endMinute) {
@@ -842,27 +812,28 @@ public class CalendarViewActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-//        switch (item.getItemId()) {
-//            case R.id.search_day:
-//                final DatePicker datePicker = (DatePicker) inflater.inflate(getResources().getLayout(R.layout.picker_layout), null);
-//                datePicker.updateDate(DateUtils.getCurrentYear(), DateUtils.getCurrentMonth() - 1, DateUtils.getCurrentFirstDay());
-//                new android.app.AlertDialog.Builder(CalendarViewActivity.this)
-//                        .setTitle("Change week")
-//                        .setMessage("Select the day you want to go")
-//                        .setView(datePicker)
-//                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                DateUtils.setDaysOfWeek(datePicker.getCalendarView().getDate());
-//                                updateView();
-//                            }
-//                        })
-//                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                // do nothing
-//                            }
-//                        })
-//                        .show();
-//        }
+        switch (item.getItemId()) {
+            case R.id.search_day:
+                final DatePicker datePicker = (DatePicker) inflater.inflate(getResources().getLayout(R.layout.picker_layout), null);
+                datePicker.updateDate(DateUtils.getCurrentYear(), DateUtils.getCurrentMonth() - 1, DateUtils.getCurrentFirstDay());
+                new android.app.AlertDialog.Builder(CalendarViewActivity.this)
+                        .setTitle("Change week")
+                        .setMessage("Select the day you want to go")
+                        .setView(datePicker)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Log.d(TAG, "Date Selected:\t" + datePicker.getCalendarView().getDate());
+                                DateUtils.setDaysOfWeek(datePicker.getCalendarView().getDate());
+                                updateView();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .show();
+        }
         return super.onOptionsItemSelected(item);
     }
 

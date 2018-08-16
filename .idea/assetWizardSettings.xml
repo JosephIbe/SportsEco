@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/alert/ic_warning_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/hardware/ic_keyboard_arrow_left_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -29,8 +29,11 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="e51b24" />
-                            <entry key="outputName" value="warning" />
+                            <entry key="height" value="36" />
+                            <entry key="outputName" value="previous" />
+                            <entry key="overrideSize" value="true" />
                             <entry key="sourceFile" value="C:\Users\JosephJoey" />
+                            <entry key="width" value="36" />
                           </map>
                         </option>
                       </PersistentState>

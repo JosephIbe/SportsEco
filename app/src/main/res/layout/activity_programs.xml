@@ -10,12 +10,36 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/colorPrimary">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Programs Calendar"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif-condensed"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar">
+        
+        <com.jjoey.sportseco.utils.MonthCalendarView
+            android:id="@+id/monthCalendarView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        
     </RelativeLayout>
 
 </RelativeLayout>

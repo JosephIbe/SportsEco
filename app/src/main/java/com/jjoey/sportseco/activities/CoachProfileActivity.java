@@ -170,6 +170,7 @@ public class CoachProfileActivity extends AppCompatActivity {
 
     private void startHomeActivity() {
         startActivity(new Intent(CoachProfileActivity.this, HomeActivity.class));
+        overridePendingTransition(R.anim.anim_slide_left, R.anim.anim_slide_right);
         finish();
     }
 
