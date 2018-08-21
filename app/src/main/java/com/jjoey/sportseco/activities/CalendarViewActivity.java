@@ -91,7 +91,9 @@ public class CalendarViewActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ImageView backIV;
     private ScrollView scrollView;
-    private LinearLayout mainLayout, sundayLayout, mondayLayout, tuesdayLayout, wednesdayLayout, thursdayLayout, fridayLayout, saturdayLayout;
+    private LinearLayout mainLayout, sundayLayout, mondayLayout, tuesdayLayout,
+                        wednesdayLayout, thursdayLayout, fridayLayout, saturdayLayout;
+
     private TextView monday, tuesday, wednesday, thursday, friday, saturday, sunday, month, year;
     private String[] days = null;
 
@@ -432,10 +434,12 @@ public class CalendarViewActivity extends AppCompatActivity {
 
                         if (Math.abs(deltaX) > 0) {
                             if (deltaX >= 0) {
+                                Log.d(TAG, "Right Swipe");
                                 DateUtils.previousWeek();
                                 updateView();
                                 return true;
                             } else {
+                                Log.d(TAG, "Left Swipe");
                                 DateUtils.nextWeek();
                                 updateView();
                                 return true;

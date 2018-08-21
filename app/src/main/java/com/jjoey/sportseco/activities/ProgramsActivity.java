@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.jjoey.sportseco.R;
 import com.jjoey.sportseco.utils.MonthCalendarView;
@@ -14,6 +16,7 @@ import java.util.HashSet;
 public class ProgramsActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private ImageView backIV;
     private MonthCalendarView monthCalendarView;
 
     @Override
@@ -21,8 +24,15 @@ public class ProgramsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_programs);
 
-        toolbar = findViewById(R.id.toolbar);
+        initViews();
         setSupportActionBar(toolbar);
+
+        backIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startHomeActivity();
+            }
+        });
 
         monthCalendarView = findViewById(R.id.monthCalendarView);
 
@@ -31,6 +41,11 @@ public class ProgramsActivity extends AppCompatActivity {
 
         monthCalendarView.updateCalendar(events);
 
+    }
+
+    private void initViews() {
+        toolbar = findViewById(R.id.toolbar);
+        backIV = findViewById(R.id.backIV);
     }
 
     private void startHomeActivity(){
